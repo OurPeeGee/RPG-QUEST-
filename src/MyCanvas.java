@@ -12,7 +12,9 @@ class MyCanvas extends JComponent {
     Graphics2D g2 = (Graphics2D) g;
 
     Image img1 = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Marcus\\workspace\\RPG-QUEST-\\src\\resources\\forest_town.png");
+    Image img2 = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Marcus\\workspace\\RPG-QUEST-\\src\\resources\\town_forest_tiles.png");
     g2.drawImage(img1, 0, 0, this);
+    g2.drawImage(img2, 200, 200, this);
     g2.finalize();
   }
 }
