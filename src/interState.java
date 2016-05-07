@@ -4,7 +4,7 @@ public interface interState
 {
 	
 	public void tick(float elapT);
-	public void Render();
+	public  void Render();
 	public void gsEnter();
 	public void gsExit(); 
 	

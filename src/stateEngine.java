@@ -1,10 +1,10 @@
 
 public class stateEngine {
 	
-	public void update(float eLapt){
+	public static void update(float elapT){
 		
 	}
-	public void render(){
+	public static void render(){
 		
 	}
 	public void change(String stateName){
