@@ -13,6 +13,10 @@ public class stateEngine {
 	public void add(String name){
 		
 	}
+	public void Add(String string, GamStCombat gamStCombat) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }
