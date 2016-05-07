@@ -5,7 +5,7 @@ import java.text.*;
 public class Character extends Entity {
 
 	public int health=100;
-	public int spd= 3;
+	public int spd= 32;
 	public int dmg = 15;
 	
 	
@@ -46,4 +46,5 @@ public class Character extends Entity {
 	{
 		health=health-hit;
 	}
+	
 }
