@@ -5,7 +5,7 @@ import java.text.*;
 public class Entity {
 	public int refnum;
 	public String name;
-	public String discript="";
+	public String discript;
 	public Entity(int ref, String x,String d)
 	{
 		refnum=ref;
