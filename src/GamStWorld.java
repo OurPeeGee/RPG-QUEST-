@@ -6,6 +6,7 @@ public class GamStWorld extends GamSt implements interState {
 	public void Render() {
 		// TODO Auto-generated method stub
 		System.out.println("world render");
+		
 	}
 
 	

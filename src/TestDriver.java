@@ -1,3 +1,9 @@
+import javax.swing.JFrame;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.ImageObserver;
 
 public class TestDriver {
 	
@@ -17,7 +23,14 @@ public class TestDriver {
 		
 		System.out.println("welcome to the smack down brother");
 		long startTime = System.currentTimeMillis();
+		JFrame window = new JFrame();
+	    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    window.setBounds(10, 0, 1024, 768);
+	    window.getContentPane().add(new MyCanvas());
+	    window.setVisible(true);
 		loop42(startTime);
+		
+		
 		
 	}
 	public static void loop42(long startTime)
@@ -27,7 +40,7 @@ public class TestDriver {
 			cQuest.update(GetElapsedFrameTime());
 			while(true)
 			{
-				
+				System.out.println("welcome to the smack down brother");
 				cQuest.Render();
 			}
 			
