@@ -1,6 +1,8 @@
 
 import java.util.TreeMap;
 
+import javax.swing.JFrame;
+
 public class stateEngine {
 	
 	static TreeMap<String, interState> toGamSt = new TreeMap<String, interState>();

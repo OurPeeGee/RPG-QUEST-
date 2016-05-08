@@ -12,7 +12,17 @@ public class Graphics2DDrawImage {
 	    JFrame window = new JFrame();
 	    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    window.setBounds(10, 0, 1024, 768);
-	    window.getContentPane().add(new MyCanvas());
+	    window.getContentPane().add(new MyCanvas(20,16, null));
+	    window.setVisible(true);
+	    
+	    try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    window.getContentPane().removeAll();
+	    window.getContentPane().add(new MyCanvas(1000, 600, null));
 	    window.setVisible(true);
 	  }
 }

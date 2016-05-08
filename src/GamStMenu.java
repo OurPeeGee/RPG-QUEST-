@@ -1,18 +1,23 @@
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.image.ImageObserver;
 
-public  class GamStMenu extends GamSt implements interState, ImageObserver {
+
+import javax.swing.JFrame;
+
+public  class GamStMenu extends GamSt implements interState {
 					
-	
+	private int movement;
 
-
-	public void Render() {
+	public void Render(JFrame window) {
 		// TODO Auto-generated method stub
 		System.out.println("Menu render");
-		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    window.getContentPane().removeAll();
+	    window.getContentPane().add(new MyCanvas(movement, 600, null));
+	    window.setVisible(true);
 		    
 	}
 
@@ -30,16 +35,14 @@ public  class GamStMenu extends GamSt implements interState, ImageObserver {
 	
 	public void Update(float elapT) {
 		// TODO Auto-generated method stub
-		System.out.println("Menu Update");
 		
+	   movement=(int) elapT;
+	   System.out.println("moved::"+movement);
+	    
 	}
 
 
-	@Override
-	public boolean imageUpdate(Image arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 }
 
