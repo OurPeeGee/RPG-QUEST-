@@ -9,18 +9,11 @@ public  class GamStMenu extends GamSt implements interState, ImageObserver {
 	
 
 
-	public void Render(Graphics g) {
+	public void Render() {
 		// TODO Auto-generated method stub
 		System.out.println("Menu render");
 		
 		    
-			Graphics2D g2 = (Graphics2D) g;
-
-		    Image img1 = Toolkit.getDefaultToolkit().getImage("resources\\forest_town.png");
-		    Image img2 = Toolkit.getDefaultToolkit().getImage("resources\\town_forest_tiles.png");
-		    g2.drawImage(img1, 0, 0, this);
-		    g2.drawImage(img2, 200, 200, this);
-		    g2.finalize();
 	}
 
 	

@@ -7,8 +7,6 @@ import java.awt.Toolkit;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-
-
 public class Graphics2DDrawImage {
 	public static void main(String[] a) {
 	    JFrame window = new JFrame();
