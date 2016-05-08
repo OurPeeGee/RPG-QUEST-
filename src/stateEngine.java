@@ -9,11 +9,11 @@ public class stateEngine {
 	
 	static interState GamstCurrent = toGamSt.get("Menu"); 
 	
-	public static void update(float elapT){
-	//	GamstCurrent.Update(elapT); 
+	public void update(float elapT){
+		GamstCurrent.Update(elapT); 
 	}
-	public void Render(){
-		GamstCurrent.Render();
+	public void Render(JFrame window){
+		GamstCurrent.Render(window);
 	}
 	public void change(String name){
 		GamstCurrent.gsExit();
