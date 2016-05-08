@@ -1,5 +1,6 @@
 
 public class stateEngine {
+
 	
 	public static void update(float elapT){
 		
@@ -10,13 +11,11 @@ public class stateEngine {
 	public void change(String stateName){
 		
 	}
-	public void add(String name){
-		
-	}
-	public void Add(String string, GamStCombat gamStCombat) {
+	public void Add(String string) {
 		// TODO Auto-generated method stub
 		
 	}
+	
 	
 	
 }

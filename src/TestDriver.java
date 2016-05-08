@@ -6,11 +6,15 @@ public class TestDriver {
 		stateEngine cQuest = new stateEngine(); 
 		 
 		// A state for each game mode
-		cQuest.Add("Menu",   new GamStMenu());
-		cQuest.Add("Map",   new GamStMap(cQuest));
-		cQuest.Add("World",   new GamStWorld(cQuest));
-		cQuest.Add("Com",     new GamStCombat());
-		cQuest.Add("Inv", new GamStInventory(cQuest));
+		cQuest.Add("Menu"   );
+		
+		cQuest.Add("Map"   );
+		
+		cQuest.Add("World");
+		
+		cQuest.Add("Com");
+		
+		cQuest.Add("Inv");
 		
 		System.out.println("welcome to the smack down brother");
 		Update();

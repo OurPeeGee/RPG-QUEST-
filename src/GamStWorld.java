@@ -1,5 +1,5 @@
 
-public class GamStWorld extends GamStMenu implements interState {
+public class GamStWorld implements interState {
 
 	public GamStWorld(stateEngine cQuest) {
 		// TODO Auto-generated constructor stub
