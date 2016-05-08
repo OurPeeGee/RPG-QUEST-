@@ -1,32 +1,29 @@
 
-public class GamStWorld implements interState {
-
-	public GamStWorld(stateEngine cQuest) {
-		// TODO Auto-generated constructor stub
-	}
-
+public class GamStWorld extends GamSt implements interState {
 	
 
-	public void gsEnter() {
-		// TODO Auto-generated method stub
 
-	}
-	
-	public void gsExit() {
-		// TODO Auto-generated method stub
-
-	}
-
-	
 	public void Render() {
 		// TODO Auto-generated method stub
-		
+		System.out.println("world render");
 	}
-	@Override
+
+	
+	public void gsEnter() {
+		// TODO Auto-generated method stub
+		System.out.println("world enter");
+	}
+
+
+	public void gsExit() {
+		// TODO Auto-generated method stub
+		System.out.println("world exit");
+	}
+
+	
 	public void Update(float elapT) {
 		// TODO Auto-generated method stub
-		
+			System.out.println("world update");
+			
 	}
-
 }
-

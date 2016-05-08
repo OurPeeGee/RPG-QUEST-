@@ -2,8 +2,6 @@
 //Parent interface for game state alteration. 
 public interface interState
 {
-	
-	
 	public  void Render();
 	public void gsEnter();
 	public void gsExit();

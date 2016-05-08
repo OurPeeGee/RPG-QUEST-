@@ -1,30 +1,31 @@
 
-public class GamStMenu implements interState {
-
+public class GamStMenu extends GamSt implements interState {
+					
 	
 
-	@Override
+
 	public void Render() {
 		// TODO Auto-generated method stub
-
+		System.out.println("Menu render");
 	}
 
-	@Override
+	
 	public void gsEnter() {
 		// TODO Auto-generated method stub
-
+		System.out.println("Menu enter");
 	}
 
-	@Override
 	public void gsExit() {
 		// TODO Auto-generated method stub
-
+		System.out.println("Menu exit");
 	}
 
-	@Override
+	
 	public void Update(float elapT) {
 		// TODO Auto-generated method stub
+		System.out.println("Menu Update");
 		
 	}
 
 }
+

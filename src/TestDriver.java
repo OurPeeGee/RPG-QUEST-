@@ -1,24 +1,19 @@
-import java.io.IOException;
-
 
 public class TestDriver {
 	
 	static stateEngine cQuest = new stateEngine(); 
 	private static long lastTime;
+	private static GamSt GamStMenu;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
 		lastTime=0;
 		// A state for each game mode
-		cQuest.Add("Menu");
+		cQuest.Add("Menu", new GamStMenu());
+		cQuest.Add("World", new GamStWorld());
 		
-		cQuest.Add("Map" );
 		
-		cQuest.Add("World");
-		
-		cQuest.Add("Com");
-		
-		cQuest.Add("Inv");
+		cQuest.change("Menu");
 		
 		System.out.println("welcome to the smack down brother");
 		long startTime = System.currentTimeMillis();
@@ -29,10 +24,11 @@ public class TestDriver {
 	{
 		while(true)
 		{
-			Update();
+			cQuest.update(GetElapsedFrameTime());
 			while(true)
 			{
-				GetElapsedFrameTime();
+				
+				cQuest.Render();
 			}
 			
 		}
