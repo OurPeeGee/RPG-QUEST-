@@ -19,10 +19,13 @@ public class GamStTemplate implements interState {
 		
 	}
 
-	
-	public void tick(float elapT) {
+	@Override
+	public void Update(float elapT) {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
+	
 
 }

@@ -1,14 +1,18 @@
+import java.io.IOException;
+
 
 public class TestDriver {
-
+	
+	static stateEngine cQuest = new stateEngine(); 
+	private static long lastTime;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		stateEngine cQuest = new stateEngine(); 
-		 
-		// A state for each game mode
-		cQuest.Add("Menu"   );
 		
-		cQuest.Add("Map"   );
+		lastTime=0;
+		// A state for each game mode
+		cQuest.Add("Menu");
+		
+		cQuest.Add("Map" );
 		
 		cQuest.Add("World");
 		
@@ -17,17 +21,33 @@ public class TestDriver {
 		cQuest.Add("Inv");
 		
 		System.out.println("welcome to the smack down brother");
-		Update();
+		long startTime = System.currentTimeMillis();
+		loop42(startTime);
+		
+	}
+	public static void loop42(long startTime)
+	{
+		while(true)
+		{
+			Update();
+			while(true)
+			{
+				GetElapsedFrameTime();
+			}
+			
+		}
+		
 	}
 	public static void Update()
 	{
-	    float elapT = GetElapsedFrameTime();
-	    stateEngine.update(elapT);
-	    stateEngine.render();
+		cQuest.update(lastTime);
+	    
 	}
-	private static float GetElapsedFrameTime() {
+	private static long GetElapsedFrameTime() {
+		return lastTime;
 		// TODO Auto-generated method stub
-		return 0;
+		
+		
 	}
-
+   
 }

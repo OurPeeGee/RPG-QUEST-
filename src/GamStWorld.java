@@ -22,9 +22,8 @@ public class GamStWorld implements interState {
 		// TODO Auto-generated method stub
 		
 	}
-
-	
-	public void tick(float elapT) {
+	@Override
+	public void Update(float elapT) {
 		// TODO Auto-generated method stub
 		
 	}

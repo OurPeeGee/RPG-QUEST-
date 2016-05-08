@@ -18,7 +18,7 @@ public class GamStInventory implements interState {
 	}
 
 	
-	public void Render() {
+	public void Render(){
 		// TODO Auto-generated method stub
 		
 	}
@@ -29,6 +29,14 @@ public class GamStInventory implements interState {
 		
 	}
 
-}
+
+
+	@Override
+	public void Update(float elapT) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
+
+

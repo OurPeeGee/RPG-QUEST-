@@ -27,7 +27,13 @@ public class GamStMap implements interState{
 		
 	}
 
-}
+	@Override
+	public void Update(float elapT) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
+
+
 
