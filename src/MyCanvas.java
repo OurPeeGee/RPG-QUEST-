@@ -20,6 +20,7 @@ class MyCanvas extends JComponent {
 		File file = new File("resources\\tilemaps\\series1\\sewer_1.png");
 		FileInputStream fis = new FileInputStream(file);
 	//BufferedImage[] tileset = new BufferedImage[352];
+		/*
 		BufferedImage[] tileset = TextureLoader.getTileMap("sewer_1");
 	//BufferedImage tileBase = ImageIO.read(fis);//This contains the tileSet image and is accessed through the key which is it's name.
 	//BufferedImage tileBase = TextureLoader.getTileMap()
@@ -36,6 +37,12 @@ class MyCanvas extends JComponent {
 		
 		
 	}
+	*/
+		BufferedImage levelMap = (BufferedImage)TextureLoader.getLevelMap("resources\\tilemaps\\series1\\testsewer\\SewerTest1.xml").get(0);
+		
+		gr.drawImage(levelMap,0,0, this);
+		
+		
 	gr.finalize();
 	//Graphics2DDrawImage.main(null);
 	}catch(Exception e){

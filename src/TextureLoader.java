@@ -17,11 +17,15 @@ import java.awt.image.Raster;
 public class TextureLoader {//Load will need to return a hashmap of the filename as the key, and a bitmap image for that level to display
 	
 	private static HashMap<String, BufferedImage[]> tiles = new HashMap<String, BufferedImage[]>();
-	
+	private static HashMap<String, ArrayList<BufferedImage>> levelMaps = new HashMap<String, ArrayList<BufferedImage>>();
+	//TODO each map file will need to have 3 layers: the base layer, the transparent base layer, and a top layer.  
 	public static void load(){//Only loads one scene right now
 		//HashMap<String, BufferedImage> tiles = new HashMap<String, BufferedImage>();
+		
+		//TODO this method will need to accept a file source.  Another method will call this one giving the file source for EACH Map of the game
+		
 		List<TileSet> Tiles = new ArrayList<TileSet>();
-		List<BufferedImage> tileImages = new ArrayList<BufferedImage>();
+		//List<BufferedImage> tileImages = new ArrayList<BufferedImage>();
 		int firstGid;
 		String Name;
 		int mapWidth;
@@ -31,11 +35,13 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 		int imageWidth;
 		int imageHeight;
 		String ImagePath;
-		
+		String filePathName = "resources\\tilemaps\\series1\\testsewer\\SewerTest1.xml";//TODO TEMPORARY FOR TESTING
+		ArrayList<BufferedImage> levelMap = new ArrayList<BufferedImage>();
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try{
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document document = builder.parse(new File( "resources\\tilemaps\\series1\\testsewer\\SewerTest1.xml" ));
+			
 			//Node mapNode = 
 			Node map = document.getDocumentElement();
 			if(map == null){
@@ -119,6 +125,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			
 			//This method constructs the entire image.  This can be done better by putting a hashmap of the map name as the key to a list of layer
 			//tilecoordinate arrays which are then constructed and printed
+			ArrayList<BufferedImage> layers = new ArrayList<BufferedImage>();
 			NodeList lList = document.getElementsByTagName("layer");
 			BufferedImage screenBitmap = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
 			BufferedImage screenBitmapTopLayer = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
@@ -210,7 +217,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 					int sourceY = (int) Math.ceil(tileGid/currentTileSet.getTileAmountWidth()-1);//This might be where the error is.  the source seems like it might be wrong
 					int sourceX = tileGid - (currentTileSet.getTileAmountWidth()*sourceY) - 1;
 					 // copy the tile from the tileset onto our bitmap
-					if(layerMap == 0){
+					//if(layerMap == 0){
 						//The issue appears to be coming from tileGid.  It appears that the data array in the hashmap may be wrong
 						//g.drawImage(tiles.get(currentTileSet.getName())[tileGid], destX, destY, currentTileSet.getTileWidth(), currentTileSet.getTileWidth(), null);
 						//System.out.println(tileGid);
@@ -219,6 +226,8 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 						Graphics2D g = screenBitmap.createGraphics();
 						g.drawImage(tiles.get(currentTileSet.getName())[tileCoordinates[spriteForY][spriteForX]], destX, destY, currentTileSet.getTileWidth(), currentTileSet.getTileWidth(), null);
 						
+						//layers.add(e)
+						
 						
 						//screenBitmap.setData(new Raster(null, null, null, null, null));
 						
@@ -226,13 +235,13 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 						//screenBitmap.
 						//screenBitmap.
 						
-					}
-					else{
+					//}
+				//	else{
 						
-						Graphics2D g = screenBitmapTopLayer.createGraphics();
-						g.drawImage(tiles.get(currentTileSet.getName())[tileCoordinates[spriteForY][spriteForX]], destX, destY, currentTileSet.getTileWidth(), currentTileSet.getTileWidth(), null);
+					//	Graphics2D g = screenBitmapTopLayer.createGraphics();
+					//	g.drawImage(tiles.get(currentTileSet.getName())[tileCoordinates[spriteForY][spriteForX]], destX, destY, currentTileSet.getTileWidth(), currentTileSet.getTileWidth(), null);
 						
-					}
+					//}
 					
 					//We found the right tileset for this gid
 					//currentTileSet = tileSet1;
@@ -244,6 +253,8 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 				
 				
 			}
+			
+			layers.add(screenBitmap);
 			//g.finalize();
 			
 				
@@ -254,9 +265,28 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			//This currently combines 2 layers into one BufferedImage
 			BufferedImage combined = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
 			Graphics2D gc = combined.createGraphics();
-			gc.drawImage(screenBitmapTopLayer, 0, 0, null);
-			gc.drawImage(screenBitmap, 0, 0, null);
+			//for(int w = 0; w<layers.size(); w++){//This needs to combine the first two layers into the background image
+			for(int w = 0; w<2; w++){
+				//may need to limit to constant size of 2 so that we only combine the first 2 layers.
+				gc.drawImage(layers.get(w), 0, 0, null);
+				
+				
+				
+				
+			}
 			gc.finalize();
+			
+			levelMap.add(combined);
+			levelMaps.put(filePathName, levelMap);
+			
+			
+			
+			//BufferedImage combined = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
+			//Graphics2D gc = combined.createGraphics();
+			//gc.drawImage(screenBitmapTopLayer, 0, 0, null);
+			//gc.drawImage(screenBitmap, 0, 0, null);
+			//gc.finalize();
+		//	levelMaps.add
 		File outputfile = new File("image2.png");
 		ImageIO.write(combined, "png", outputfile);
 			
@@ -298,6 +328,9 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 	//private BufferedImage createOneTile(String name,){
 		//BufferedImage res = new BufferedImage()
 	//}
+	public static ArrayList<BufferedImage> getLevelMap(String name){
+		return levelMaps.get(name);
+	}
 	
 	public static BufferedImage[] getTileMap(String name){
 		return tiles.get(name);
