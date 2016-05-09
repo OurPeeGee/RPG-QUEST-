@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
+
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
@@ -71,8 +70,11 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 					BufferedImage[] tileset = new BufferedImage[tileSetLoad.getTileAmountWidth()*Math.floorDiv(imageHeight,tileHeight)];
 					BufferedImage tileBase = ImageIO.read(new File(ImagePath));//This contains the tileSet image and is accessed through the key which is it's name.
 					for(int a = 0; a< Math.floorDiv(imageHeight,tileHeight); a++){
-						for(int q = 0; q<tileSetLoad.getTileAmountWidth(); q++){
-							tileset[q+a*tileSetLoad.getTileAmountWidth()] = tileBase.getSubimage(q*tileWidth, a*tileHeight, tileWidth, tileHeight);
+						for(int q = 0; q<tileSetLoad.getTileAmountWidth()-1; q++){
+							//TODO this adds all of the tiles into the array, but they are all accessed in a way that 
+							//leaves the first index empty to serve as the transparent tile, and then the last tile may or may not actually get put into the array, 
+							//This needs to be tested to make sure we don't run into errors or limitations while building the game
+							tileset[q+a*tileSetLoad.getTileAmountWidth()+1] = tileBase.getSubimage(q*tileWidth, a*tileHeight, tileWidth, tileHeight);
 							//tileset[q+a*tileSetLoad.getTileAmountWidth()] = tileBase.getSubimage(1,1,1,1);
 							
 						}
@@ -118,6 +120,10 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			//This method constructs the entire image.  This can be done better by putting a hashmap of the map name as the key to a list of layer
 			//tilecoordinate arrays which are then constructed and printed
 			NodeList lList = document.getElementsByTagName("layer");
+			BufferedImage screenBitmap = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
+			BufferedImage screenBitmapTopLayer = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
+			Graphics2D[] gList = new Graphics2D[lList.getLength()];
+			//for(int i = 0; i<1; i++){
 			for(int i = 0; i<lList.getLength(); i++){
 				int[] tileArray = new int[mapWidth*mapHeight];//TODO might need to change from a constant to a variable
 				Node layer = lList.item(i);
@@ -138,6 +144,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 					int gid = Integer.parseInt(eTile.getAttribute("gid"));
 					//System.out.println(gid);
 					if(gid>0){
+						System.out.println(gid);
 						tileArray[tileLength] = gid;//This constructs the tileArray and assigns each part the proper dig id, unless it is zero, since zero is not stored.
 					}
 					tileLength++;
@@ -165,9 +172,19 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			//BufferedImage screenBitmap = new BufferedImage(mapWidth*currentTileSet.getTileWidth(), mapHeight*currentTileSet.getTileHeight(), BufferedImage.TYPE_BYTE_BINARY);
 			//BufferedImage screenBitmapTopLayer = new BufferedImage(mapWidth*currentTileSet.getTileWidth(), mapHeight*currentTileSet.getTileHeight(), BufferedImage.TYPE_BYTE_BINARY);
 			//BufferedImage screenBitTiles = new BufferedImage[]
-			BufferedImage screenBitmap = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
-			BufferedImage screenBitmapTopLayer = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
-			Graphics2D g = screenBitmap.createGraphics();
+			
+			
+			File file = new File("resources\\tilemaps\\series1\\sewer_1.png");
+			FileInputStream fis = new FileInputStream(file);
+		//BufferedImage[] tileset = new BufferedImage[352];
+			BufferedImage tileset = ImageIO.read(fis);
+			
+			
+			
+			//BufferedImage screenBitmap = new BufferedImage(mapWidth*16, mapHeight*16, tileset.getType());
+			//BufferedImage screenBitmapTopLayer = new BufferedImage(mapWidth*16, mapHeight*16, tileset.getType());
+			//screenBitmap.
+			//Graphics2D g = screenBitmap.createGraphics();
 			for(int spriteForY = 0; spriteForY < mapHeight; spriteForY++){
 				for(int spriteForX = 0; spriteForX < mapWidth; spriteForX++){
 					int tileGid = (int) tileCoordinates[spriteForY][spriteForX];
@@ -183,7 +200,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 					
 					
 					//img = new BufferedImage()
-					BufferedImage tile = new BufferedImage(currentTileSet.getTileWidth(), currentTileSet.getTileWidth(), BufferedImage.TYPE_INT_ARGB);
+					//BufferedImage tile = new BufferedImage(currentTileSet.getTileWidth(), currentTileSet.getTileWidth(), tileset.getType());
 					
 					// basic math to find out where the tile is coming from on the source image
 					int destY = spriteForY*currentTileSet.getTileWidth();//might need to be replace with tileHeight, since I suspect this is a bug here.  //TODO
@@ -196,13 +213,24 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 					if(layerMap == 0){
 						//The issue appears to be coming from tileGid.  It appears that the data array in the hashmap may be wrong
 						//g.drawImage(tiles.get(currentTileSet.getName())[tileGid], destX, destY, currentTileSet.getTileWidth(), currentTileSet.getTileWidth(), null);
-						System.out.println(tileGid);
-						g.drawImage(tiles.get(currentTileSet.getName())[tileGid], destX, destY, currentTileSet.getTileWidth(), currentTileSet.getTileWidth(), null);
+						//System.out.println(tileGid);
+						//g.drawImage(tiles.get(currentTileSet.getName())[tileGid], destX, destY, currentTileSet.getTileWidth(), currentTileSet.getTileWidth(), null);
+						//gList[i] = 
+						Graphics2D g = screenBitmap.createGraphics();
+						g.drawImage(tiles.get(currentTileSet.getName())[tileCoordinates[spriteForY][spriteForX]], destX, destY, currentTileSet.getTileWidth(), currentTileSet.getTileWidth(), null);
+						
+						
 						//screenBitmap.setData(new Raster(null, null, null, null, null));
 						
 						//screenBitmap.createGraphics().drawImage(tiles.get(currentTileSet.getName())., x, y, observer)
 						//screenBitmap.
 						//screenBitmap.
+						
+					}
+					else{
+						
+						Graphics2D g = screenBitmapTopLayer.createGraphics();
+						g.drawImage(tiles.get(currentTileSet.getName())[tileCoordinates[spriteForY][spriteForX]], destX, destY, currentTileSet.getTileWidth(), currentTileSet.getTileWidth(), null);
 						
 					}
 					
@@ -216,15 +244,28 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 				
 				
 			}
-			g.finalize();
+			//g.finalize();
 			
 				
-			File outputfile = new File("image.png");
-			ImageIO.write(screenBitmap, "png", outputfile);
 				
 				
 				
 			}
+			//This currently combines 2 layers into one BufferedImage
+			BufferedImage combined = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
+			Graphics2D gc = combined.createGraphics();
+			gc.drawImage(screenBitmapTopLayer, 0, 0, null);
+			gc.drawImage(screenBitmap, 0, 0, null);
+			gc.finalize();
+		File outputfile = new File("image2.png");
+		ImageIO.write(combined, "png", outputfile);
+			
+			
+			
+			
+			
+			
+			
 			/*
 			 * List<BufferedImage> tileImages = new ArrayList<BufferedImage>();
 			for(int i = 0; i<totalTileSets; i++){
