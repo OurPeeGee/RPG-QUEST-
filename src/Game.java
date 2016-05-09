@@ -27,6 +27,7 @@ public class Game {
 		*/
 		TextureLoader.load();
 		Graphics2DDrawImage.main(null);
+		//test
 	//	}catch(Exception e){
 		//	e.printStackTrace();
 		//}
