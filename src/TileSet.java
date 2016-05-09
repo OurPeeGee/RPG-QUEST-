@@ -36,5 +36,11 @@ public class TileSet {
 	public int getTileHeight(){
 		return tileHeight;
 	}
+	public int getTileAmountWidth(){
+		return tileAmountWidth;
+	}
+	public String getName(){
+		return Name;
+	}
 
 }

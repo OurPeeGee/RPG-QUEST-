@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="16" tileheight="16" nextobjectid="19">
  <tileset firstgid="1" name="sewer_1" tilewidth="16" tileheight="16" tilecount="352" columns="16">
-  <image source="resources/tilemaps/series 1/sewer_1.png" width="256" height="352"/>
+  <image source="resources/tilemaps/series1/sewer_1.png" width="256" height="352"/>
  </tileset>
  <layer name="TileLayer1" width="32" height="24">
   <data>

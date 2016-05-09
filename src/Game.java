@@ -1,9 +1,35 @@
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+
+import javax.imageio.ImageIO;
 
 public class Game {
 
 	public static void main(String[] args) {
 		
+		
+		/*
+		try{
+			File file = new File("resources\\tilemaps\\series1\\sewer_1.png");
+			FileInputStream fis = new FileInputStream(file);
+		BufferedImage[] tileset = new BufferedImage[16*Math.floorDiv(352,256)];
+		BufferedImage tileBase = ImageIO.read(fis);//This contains the tileSet image and is accessed through the key which is it's name.
+		for(int a = 0; a< 16*Math.floorDiv(352,256); a++){
+			
+			tileset[a] = tileBase.getSubimage(a*16, a*16, 16, 16);
+			Graphics2D gr = tileset[a].createGraphics();  
+			gr.drawImage(tileBase, 0, 0, 16, 16, 16 * a%32, 16 * a, 16 * a%32 + 16, 16 * a + 16, null);  
+			gr.finalize();
+			
+		}
+		*/
+		TextureLoader.load();
 		Graphics2DDrawImage.main(null);
+	//	}catch(Exception e){
+		//	e.printStackTrace();
+		//}
 
 	}
 
