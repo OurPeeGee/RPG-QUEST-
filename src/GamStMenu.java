@@ -1,28 +1,28 @@
 //Erik Olsen
-import java.awt.event.KeyEvent;
-import java.util.EventListener;
-import java.util.Scanner;
+//Game State Menu 
+//5/7/2016
+
 import javax.swing.JFrame;
 
-
-
-public  class GamStMenu extends GamSt implements interState,EventListener {
-	Scanner scan = new Scanner(System.in);			
+public  class GamStMenu extends GamSt implements interState {
+			
 	private int movementX;
 	private int movementY;
 	
 	public void Render(JFrame window) {
 		// TODO Auto-generated method stub
-		System.out.println("Menu render");
-		
+		//System.out.println("Menu render");
+		//test
+		//
 	    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    window.setBounds(10, 0, 1024, 768);
+	    window.setBounds(10, 0, 2560, 1440);
 		window.getContentPane().add(new MyCanvas(20,16, null));
 	    window.setVisible(true);
 	    window.getContentPane().removeAll();
 	    window.getContentPane().add(new MyCanvas(movementX, movementY, null));
 	    window.setVisible(true);
-		    
+		//
+	    //test, to be implemented in own class
 	}
 
 	
@@ -37,35 +37,14 @@ public  class GamStMenu extends GamSt implements interState,EventListener {
 	}
 	public void Update(float elapT){
 		// TODO Auto-generated method stub
-		System.out.println("moved::"+movementX+" "+movementY);
+		//System.out.println("moved::"+movementX+" "+movementY);
 		
-		keyPressed();
-			
-	   
-	    
+		movementX+=1*elapT*2;
+		movementY+=1*elapT*2;
 	}
-	public void keyPressed() {
-
-	    int key = 1;
-
-	    if (key == KeyEvent.VK_LEFT) {
-	         movementX=  -1;
-	    }
-
-	    if (key == KeyEvent.VK_RIGHT) {
-	    	movementX = 1;
-	    }
-
-	    if (key == KeyEvent.VK_UP) {
-	    	movementY = -1;
-	    }
-
-	    if (key == KeyEvent.VK_DOWN) {
-	    	movementY = 1;
-	    }
-	}
+}
 
 	
 
-}
 
+	

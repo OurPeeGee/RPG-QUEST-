@@ -11,7 +11,7 @@ public class Graphics2DDrawImage {
 	public static void main(String[] a) {
 	    JFrame window = new JFrame();
 	    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    window.setBounds(10, 0, 1024, 768);
+	    window.setBounds(10, 0, 2560, 1440);
 	    window.getContentPane().add(new MyCanvas(20,16, null));
 	    window.setVisible(true);
 	    

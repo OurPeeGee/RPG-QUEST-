@@ -1,3 +1,7 @@
+//Erik Olsen
+//Driver class to test the Game State framework functionallity gamestate methods. 
+// 5/8/2106
+
 import javax.swing.JFrame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -26,22 +30,17 @@ public class TestDriver {
 		cQuest.change("Menu");
 		
 		System.out.println("welcome to the smack down brother");
-		
-		
-		JFrame window = new JFrame();
-	    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    window.setBounds(10, 0, 1024, 768);
-	    window.getContentPane().add(new MyCanvas(20,16, null));
-	    window.setVisible(true);
+		   
 	    loop42(cQuest);
 	    
 		
 	}
+	
 	public static void loop42(stateEngine cQuest)
 	{
 	   long lastLoopTime = System.nanoTime();
-	   final int TARGET_FPS = 60;
-	   final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;   
+	   final int FrameTarget = 60;
+	   final long TimeTarget = 1000000000 / FrameTarget;   
 
 	   
 	   while (true)
@@ -50,33 +49,40 @@ public class TestDriver {
 	      long now = System.nanoTime();
 	      long updateLength = now - lastLoopTime;
 	      lastLoopTime = now;
-	      double delta = updateLength / ((double)OPTIMAL_TIME);
+	      double elapT = updateLength / ((double)TimeTarget);
 
 	      
 	      lastFpsTime += updateLength;
 	      fps++;
+	     // System.out.println("(FrameTime: "+lastFpsTime+")");
 	      
-	      if (lastFpsTime >= 1000000000)
+	      if(lastFpsTime >= 1000000000)
 	      {
 	         System.out.println("(FPS: "+fps+")");
 	         lastFpsTime = 0;
 	         fps = 0;
 	      }
 	      
-	      
-	      doGameUpdates(delta);
+	      doGameUpdates(elapT);
 	      
 	    
 	      cQuest.Render(window);
 	      
-	      //try{Thread.sleep( (lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000)};
+	     try {
+			Thread.sleep((Math.abs(lastLoopTime-System.nanoTime()) + TimeTarget)/1000000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	   }
 	}
 
 	private static void doGameUpdates(double elapT)
 	{
 	   
-	    cQuest.update((float) elapT);  
+		    cQuest.update((float) elapT);  
+	   
+	      
 	      
 	      
 	   
