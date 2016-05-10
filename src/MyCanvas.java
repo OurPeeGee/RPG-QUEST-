@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
@@ -17,8 +18,8 @@ class MyCanvas extends JComponent {
     Graphics2D gr = (Graphics2D) g;
     
     try{//This works and puts into a BufferedImage array each tile of a tilemap when the tilewidth/height and width and height are specified.
-		File file = new File("resources\\tilemaps\\series1\\sewer_1.png");
-		FileInputStream fis = new FileInputStream(file);
+		//File file = new File("resources\\tilemaps\\series1\\sewer_1.png");
+		//FileInputStream fis = new FileInputStream(file);
 	//BufferedImage[] tileset = new BufferedImage[352];
 		/*
 		BufferedImage[] tileset = TextureLoader.getTileMap("sewer_1");
@@ -38,9 +39,21 @@ class MyCanvas extends JComponent {
 		
 	}
 	*/
-		BufferedImage levelMap = (BufferedImage)TextureLoader.getLevelMap("resources\\tilemaps\\series1\\testsewer\\SewerTest1.xml").get(0);
+		ArrayList<String> levels = TextureLoader.getLevelList();
+		String name;
+		System.out.println("size = " + levels.size());
+		int count = 0;
+		for(int i = 0; i<levels.size(); i++){
+			System.out.println("MADE IT TO G-LOOP");
+			name = levels.get(i);
+			BufferedImage levelMap = (BufferedImage)TextureLoader.getLevelMap(name).get(0);
+			gr.drawImage(levelMap,i*512,0, this);
+		count++;	
+		}
+		System.out.println("Count: " + count);
+		//BufferedImage levelMap = (BufferedImage)TextureLoader.getLevelMap("resources\\tilemaps\\series1\\testsewer\\SewerTest1.xml").get(0);
 		
-		gr.drawImage(levelMap,0,0, this);
+		//gr.drawImage(levelMap,0,0, this);
 		
 		
 	gr.finalize();

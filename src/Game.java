@@ -25,7 +25,7 @@ public class Game {
 			
 		}
 		*/
-		TextureLoader.load();
+		TextureLoader.loadList();
 		Graphics2DDrawImage.main(null);
 		//test
 	//	}catch(Exception e){

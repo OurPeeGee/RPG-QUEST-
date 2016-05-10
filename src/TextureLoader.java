@@ -13,13 +13,47 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
 
-
+//TODO currently only supports one tileMap
 public class TextureLoader {//Load will need to return a hashmap of the filename as the key, and a bitmap image for that level to display
 	
 	private static HashMap<String, BufferedImage[]> tiles = new HashMap<String, BufferedImage[]>();
 	private static HashMap<String, ArrayList<BufferedImage>> levelMaps = new HashMap<String, ArrayList<BufferedImage>>();
+	private static ArrayList<String> LevelNameList = new ArrayList<String>();
+	
+	
+	public static void loadList(){
+		
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		try{
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document document = builder.parse(new File( "resources\\testLevels\\testLevelList.xml" ));
+			//Node levelList = document.getDocumentElement();
+			//Element eList = (Element) levelList;
+			NodeList lList = document.getElementsByTagName("level");
+			
+			
+			
+			String name;
+			String filePath;
+			for(int i = 0; i<lList.getLength(); i++){
+				Element level = (Element) lList.item(i);
+				name = level.getAttribute("name");
+				filePath = level.getAttribute("dataPath");
+				System.out.println(name + " " + filePath);
+				LevelNameList.add(name);
+				load(name, filePath);
+			}
+			
+			
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
 	//TODO each map file will need to have 3 layers: the base layer, the transparent base layer, and a top layer.  
-	public static void load(){//Only loads one scene right now
+	public static void load(String LName, String filePath){//Only loads one scene right now
 		//HashMap<String, BufferedImage> tiles = new HashMap<String, BufferedImage>();
 		
 		//TODO this method will need to accept a file source.  Another method will call this one giving the file source for EACH Map of the game
@@ -35,12 +69,13 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 		int imageWidth;
 		int imageHeight;
 		String ImagePath;
-		String filePathName = "resources\\tilemaps\\series1\\testsewer\\SewerTest1.xml";//TODO TEMPORARY FOR TESTING
+		String filePathName = filePath;//"resources\\tilemaps\\series1\\testsewer\\SewerTest1.xml";//TODO TEMPORARY FOR TESTING
 		ArrayList<BufferedImage> levelMap = new ArrayList<BufferedImage>();
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try{
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document document = builder.parse(new File( "resources\\tilemaps\\series1\\testsewer\\SewerTest1.xml" ));
+			//Document document = builder.parse(new File( "resources\\tilemaps\\series1\\testsewer\\SewerTest1.xml" ));
+			Document document = builder.parse(new File(filePath));
 			
 			//Node mapNode = 
 			Node map = document.getDocumentElement();
@@ -76,7 +111,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 					BufferedImage[] tileset = new BufferedImage[tileSetLoad.getTileAmountWidth()*Math.floorDiv(imageHeight,tileHeight)];
 					BufferedImage tileBase = ImageIO.read(new File(ImagePath));//This contains the tileSet image and is accessed through the key which is it's name.
 					for(int a = 0; a< Math.floorDiv(imageHeight,tileHeight); a++){
-						for(int q = 0; q<tileSetLoad.getTileAmountWidth()-1; q++){
+						for(int q = 0; q<tileSetLoad.getTileAmountWidth()-1; q++){//This somehow prevents the method from ever reaching the last part of the tilemap.
 							//TODO this adds all of the tiles into the array, but they are all accessed in a way that 
 							//leaves the first index empty to serve as the transparent tile, and then the last tile may or may not actually get put into the array, 
 							//This needs to be tested to make sure we don't run into errors or limitations while building the game
@@ -151,12 +186,12 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 					int gid = Integer.parseInt(eTile.getAttribute("gid"));
 					//System.out.println(gid);
 					if(gid>0){
-						System.out.println(gid);
+						//System.out.println(gid);
 						tileArray[tileLength] = gid;//This constructs the tileArray and assigns each part the proper dig id, unless it is zero, since zero is not stored.
 					}
 					tileLength++;
 				}
-			
+				tileLength++;
 			String layerName = eLayer.getAttribute("name");
 			//Decide where' we're going to put the layer
 			int layerMap = 0;
@@ -181,10 +216,11 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			//BufferedImage screenBitTiles = new BufferedImage[]
 			
 			
-			File file = new File("resources\\tilemaps\\series1\\sewer_1.png");
-			FileInputStream fis = new FileInputStream(file);
+			//File file = new File("resources\\tilemaps\\series1\\sewer_1.png");
+			//File file = new File("resources\\tilemaps\\series1\\sewer_1.png");
+			//FileInputStream fis = new FileInputStream(file);
 		//BufferedImage[] tileset = new BufferedImage[352];
-			BufferedImage tileset = ImageIO.read(fis);
+			//BufferedImage tileset = ImageIO.read(fis);
 			
 			
 			
@@ -266,7 +302,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			BufferedImage combined = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
 			Graphics2D gc = combined.createGraphics();
 			//for(int w = 0; w<layers.size(); w++){//This needs to combine the first two layers into the background image
-			for(int w = 0; w<2; w++){
+			for(int w = 0; w<layers.size(); w++){
 				//may need to limit to constant size of 2 so that we only combine the first 2 layers.
 				gc.drawImage(layers.get(w), 0, 0, null);
 				
@@ -277,7 +313,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			gc.finalize();
 			
 			levelMap.add(combined);
-			levelMaps.put(filePathName, levelMap);
+			
 			
 			
 			
@@ -287,7 +323,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			//gc.drawImage(screenBitmap, 0, 0, null);
 			//gc.finalize();
 		//	levelMaps.add
-		File outputfile = new File("image2.png");
+		File outputfile = new File("image3.png");
 		ImageIO.write(combined, "png", outputfile);
 			
 			
@@ -321,6 +357,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		levelMaps.put(LName, levelMap);
 		//return tiles;
 	}
 	
@@ -328,6 +365,11 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 	//private BufferedImage createOneTile(String name,){
 		//BufferedImage res = new BufferedImage()
 	//}
+	
+	public static ArrayList<String> getLevelList(){
+		return LevelNameList;
+	}
+	
 	public static ArrayList<BufferedImage> getLevelMap(String name){
 		return levelMaps.get(name);
 	}
