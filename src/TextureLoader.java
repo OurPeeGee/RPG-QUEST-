@@ -69,22 +69,24 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 		int imageWidth;
 		int imageHeight;
 		String ImagePath;
-		String filePathName = filePath;//"resources\\tilemaps\\series1\\testsewer\\SewerTest1.xml";//TODO TEMPORARY FOR TESTING
+		//String filePathName = filePath;//"resources\\tilemaps\\series1\\testsewer\\SewerTest1.xml";//TODO TEMPORARY FOR TESTING
 		ArrayList<BufferedImage> levelMap = new ArrayList<BufferedImage>();
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try{
+			
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			//Document document = builder.parse(new File( "resources\\tilemaps\\series1\\testsewer\\SewerTest1.xml" ));
 			Document document = builder.parse(new File(filePath));
 			
 			//Node mapNode = 
 			Node map = document.getDocumentElement();
-			if(map == null){
-				System.out.println("FAILURE");
-			}
+			//if(map == null){
+			//	System.out.println("FAILURE");
+			//}
 			Element eMap = (Element) map;
 			mapWidth = Integer.parseInt(eMap.getAttribute("width"));
 			mapHeight = Integer.parseInt(eMap.getAttribute("height"));
+			//BufferedImage screenBitmap = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
 			NodeList nList = document.getElementsByTagName("tileset");
 			int totalTileSets = 0;
 			for(int i = 0; i < nList.getLength(); i++){
@@ -162,10 +164,12 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			//tilecoordinate arrays which are then constructed and printed
 			ArrayList<BufferedImage> layers = new ArrayList<BufferedImage>();
 			NodeList lList = document.getElementsByTagName("layer");
+			//TODO I think screenBitmap is getting all layers rendered to it prematurely.
 			BufferedImage screenBitmap = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
 			BufferedImage screenBitmapTopLayer = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
 			Graphics2D[] gList = new Graphics2D[lList.getLength()];
 			//for(int i = 0; i<1; i++){
+			System.out.println(lList.getLength());
 			for(int i = 0; i<lList.getLength(); i++){
 				int[] tileArray = new int[mapWidth*mapHeight];//TODO might need to change from a constant to a variable
 				Node layer = lList.item(i);
@@ -228,6 +232,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			//BufferedImage screenBitmapTopLayer = new BufferedImage(mapWidth*16, mapHeight*16, tileset.getType());
 			//screenBitmap.
 			//Graphics2D g = screenBitmap.createGraphics();
+			//This loop might need fixing, since I think it loads everything to screenbitmap too early
 			for(int spriteForY = 0; spriteForY < mapHeight; spriteForY++){
 				for(int spriteForX = 0; spriteForX < mapWidth; spriteForX++){
 					int tileGid = (int) tileCoordinates[spriteForY][spriteForX];
@@ -291,6 +296,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			}
 			
 			layers.add(screenBitmap);
+			screenBitmap.flush();
 			//g.finalize();
 			
 				
@@ -303,6 +309,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			Graphics2D gc = combined.createGraphics();
 			//for(int w = 0; w<layers.size(); w++){//This needs to combine the first two layers into the background image
 			for(int w = 0; w<layers.size(); w++){
+				System.out.println(w+ " layers.length: " + layers.size());
 				//may need to limit to constant size of 2 so that we only combine the first 2 layers.
 				gc.drawImage(layers.get(w), 0, 0, null);
 				
@@ -313,6 +320,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			gc.finalize();
 			
 			levelMap.add(combined);
+			combined.flush();
 			
 			
 			
