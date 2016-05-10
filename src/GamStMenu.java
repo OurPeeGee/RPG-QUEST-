@@ -15,7 +15,8 @@ public  class GamStMenu extends GamSt implements interState {
 		//test
 		//
 	    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    window.setBounds(10, 0, 2560, 1440);
+	    window.setBounds(window.getBounds());
+	    
 		window.getContentPane().add(new MyCanvas(20,16, null));
 	    window.setVisible(true);
 	    window.getContentPane().removeAll();
@@ -39,8 +40,8 @@ public  class GamStMenu extends GamSt implements interState {
 		// TODO Auto-generated method stub
 		//System.out.println("moved::"+movementX+" "+movementY);
 		
-		movementX+=1*elapT*2;
-		movementY+=1*elapT*2;
+		movementX+=1*elapT/10;
+		movementY+=0;
 	}
 }
 

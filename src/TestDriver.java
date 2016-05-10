@@ -11,26 +11,27 @@ import java.awt.image.ImageObserver;
 
 public class TestDriver {
 	
-	static JFrame window = new JFrame();
-    
+	static JFrame window = new JFrame(); 
 	static stateEngine cQuest = new stateEngine(); 
 	private static long lastTime;
-	private static GamSt GamStMenu;
-	private static int lastFpsTime;
 	private static int fps;
+	private static int lastFpsTime;
+	
+
+	
 	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
 		lastTime=0;
-		// A state for each game mode
+		//game state for each game mode
 		cQuest.Add("Menu", new GamStMenu());
 		cQuest.Add("World", new GamStWorld());
 		cQuest.change("Menu");
 		
-		System.out.println("welcome to the smack down brother");
-		   
+		System.out.println("Driver window def");
+		window.setBounds(0,0,1800,900);  
 	    loop42(cQuest);
 	    
 		
@@ -38,54 +39,42 @@ public class TestDriver {
 	
 	public static void loop42(stateEngine cQuest)
 	{
-	   long lastLoopTime = System.nanoTime();
-	   final int FrameTarget = 60;
-	   final long TimeTarget = 1000000000 / FrameTarget;   
-
+	    lastTime =System.nanoTime();  
+	    int targetFPS = 144;
+	    float targetFpsMS= (1000/targetFPS);
+	    System.out.println(targetFpsMS);
 	   
 	   while (true)
 	   {
-	      
-	      long now = System.nanoTime();
-	      long updateLength = now - lastLoopTime;
-	      lastLoopTime = now;
-	      double elapT = updateLength / ((double)TimeTarget);
-
-	      
-	      lastFpsTime += updateLength;
+		  long curSysT =System.nanoTime(); 
+		  long frameTimeMS = ((curSysT-lastTime)/1000000);
+		  lastTime=curSysT;
+	      lastFpsTime += frameTimeMS;
 	      fps++;
-	     // System.out.println("(FrameTime: "+lastFpsTime+")");
-	      
-	      if(lastFpsTime >= 1000000000)
+	      if (lastFpsTime >= 1000)
 	      {
 	         System.out.println("(FPS: "+fps+")");
 	         lastFpsTime = 0;
 	         fps = 0;
 	      }
 	      
-	      doGameUpdates(elapT);
-	      
-	    
 	      cQuest.Render(window);
-	      
-	     try {
-			Thread.sleep((Math.abs(lastLoopTime-System.nanoTime()) + TimeTarget)/1000000);
+	      //System.out.println(targetFpsMS);
+	      System.out.println(frameTimeMS);
+	      try {
+			Thread.sleep((long)(Math.abs(targetFpsMS-frameTimeMS)+1));
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	      doGameUpdates(frameTimeMS);
 	   }
 	}
-
-	private static void doGameUpdates(double elapT)
-	{
-	   
-		    cQuest.update((float) elapT);  
-	   
-	      
-	      
-	      
-	   
+	private static void doGameUpdates(long frameTimeMS)
+	{   	
+		
+	    		cQuest.update(frameTimeMS);  	
+		
 	}
    
 }
