@@ -165,12 +165,13 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			ArrayList<BufferedImage> layers = new ArrayList<BufferedImage>();
 			NodeList lList = document.getElementsByTagName("layer");
 			//TODO I think screenBitmap is getting all layers rendered to it prematurely.
-			BufferedImage screenBitmap = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
+			
 			BufferedImage screenBitmapTopLayer = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
 			Graphics2D[] gList = new Graphics2D[lList.getLength()];
 			//for(int i = 0; i<1; i++){
 			System.out.println(lList.getLength());
 			for(int i = 0; i<lList.getLength(); i++){
+				BufferedImage screenBitmap = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
 				int[] tileArray = new int[mapWidth*mapHeight];//TODO might need to change from a constant to a variable
 				Node layer = lList.item(i);
 				//NodeList dataList = lList.
@@ -308,7 +309,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			BufferedImage combined = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
 			Graphics2D gc = combined.createGraphics();
 			//for(int w = 0; w<layers.size(); w++){//This needs to combine the first two layers into the background image
-			for(int w = 0; w<layers.size(); w++){
+			for(int w = 0; w<layers.size()-1; w++){//This loop combines already combined images
 				System.out.println(w+ " layers.length: " + layers.size());
 				//may need to limit to constant size of 2 so that we only combine the first 2 layers.
 				gc.drawImage(layers.get(w), 0, 0, null);
@@ -317,12 +318,16 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 				
 				
 			}
-			gc.finalize();
+			//gc.finalize();
 			
 			levelMap.add(combined);
 			combined.flush();
 			
-			
+			BufferedImage combined2 = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
+			Graphics2D gc2 = combined2.createGraphics();
+			gc2.drawImage(layers.get(layers.size()-1), 0, 0, null);
+			levelMap.add(combined2);
+			combined2.flush();
 			
 			
 			//BufferedImage combined = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);

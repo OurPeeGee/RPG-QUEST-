@@ -15,7 +15,7 @@ import javax.swing.JFrame;
 class MyCanvas extends JComponent {
 
   public void paint(Graphics g) {
-    Graphics2D gr = (Graphics2D) g;
+    //Graphics2D gr = (Graphics2D) g;
     
     try{//This works and puts into a BufferedImage array each tile of a tilemap when the tilewidth/height and width and height are specified.
 		//File file = new File("resources\\tilemaps\\series1\\sewer_1.png");
@@ -46,8 +46,12 @@ class MyCanvas extends JComponent {
 		for(int i = 0; i<levels.size(); i++){
 			System.out.println("MADE IT TO G-LOOP");
 			name = levels.get(i);
-			BufferedImage levelMap = (BufferedImage)TextureLoader.getLevelMap(name).get(0);
-			gr.drawImage(levelMap,i*512,0, this);
+			ArrayList<BufferedImage> layers = TextureLoader.getLevelMap(name);
+			for(int a = 0; a< layers.size(); a++){
+				BufferedImage levelMap = layers.get(a);
+				g.drawImage(levelMap,i*512,0, this);
+			}
+			
 		count++;	
 		}
 		System.out.println("Count: " + count);
@@ -56,7 +60,7 @@ class MyCanvas extends JComponent {
 		//gr.drawImage(levelMap,0,0, this);
 		
 		
-	gr.finalize();
+	g.finalize();
 	//Graphics2DDrawImage.main(null);
 	}catch(Exception e){
 		e.printStackTrace();
