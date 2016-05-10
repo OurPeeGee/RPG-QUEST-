@@ -1,6 +1,6 @@
 //Erik Olsen
 //Driver class to test the Game State framework functionallity gamestate methods. 
-// 5/8/2106
+// 5/8/2016
 
 import javax.swing.JFrame;
 import java.awt.Graphics;
@@ -16,41 +16,42 @@ public class TestDriver {
 	private static long lastTime;
 	private static int fps;
 	private static int lastFpsTime;
-	
-
-	
-	
+		
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		lastTime=0;
+		
 		//game state for each game mode
 		cQuest.Add("Menu", new GamStMenu());
 		cQuest.Add("World", new GamStWorld());
 		cQuest.change("Menu");
 		
 		System.out.println("Driver window def");
-		window.setBounds(0,0,1800,900);  
-	    loop42(cQuest);
-	    
+		window.setBounds(0,0,1800,900);  /initial jFrame def
+	        loop42(cQuest);
+	        
 		
 	}
 	
-	public static void loop42(stateEngine cQuest)
+	public static void loop42(stateEngine cQuest)//primary game loop
 	{
 	    lastTime =System.nanoTime();  
 	    int targetFPS = 144;
 	    float targetFpsMS= (1000/targetFPS);
 	    System.out.println(targetFpsMS);
+            lastTime=System.nanoTime();
 	   
 	   while (true)
 	   {
-		  long curSysT =System.nanoTime(); 
-		  long frameTimeMS = ((curSysT-lastTime)/1000000);
-		  lastTime=curSysT;
+              // block determines the loop time 
+	      long curSysT =System.nanoTime(); 
+	      long frameTimeMS = ((curSysT-lastTime)/1000000);
+	      lastTime=curSysT;
 	      lastFpsTime += frameTimeMS;
 	      fps++;
+ 
+              
 	      if (lastFpsTime >= 1000)
 	      {
 	         System.out.println("(FPS: "+fps+")");
@@ -58,23 +59,26 @@ public class TestDriver {
 	         fps = 0;
 	      }
 	      
-	      cQuest.Render(window);
+	      
 	      //System.out.println(targetFpsMS);
 	      System.out.println(frameTimeMS);
 	      try {
-			Thread.sleep((long)(Math.abs(targetFpsMS-frameTimeMS)+1));
+			Thread.sleep((long)(targetFpsMS-frameTimeMS));
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	      doGameUpdates(frameTimeMS);
+
+	       doGameUpdates(frameTimeMS);
+ 
+	       cQuest.Render(window);
 	   }
 	}
 	private static void doGameUpdates(long frameTimeMS)
+
 	{   	
-		
-	    		cQuest.update(frameTimeMS);  	
-		
+		for(int i=0;i<frameTimeMS;i++
+	    		cQuest.update(frameTimeMS);  		
 	}
    
 }
