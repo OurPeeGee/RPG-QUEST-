@@ -12,8 +12,9 @@ public class stateEngine {
 	
 	static interState GamstCurrent = toGamSt.get("Menu"); 
 	
-	public void update(float elapT){
-		GamstCurrent.Update(elapT); 
+	public void Update(JFrame window){
+		GamstCurrent.Update(window); 
+		
 	}
 	public void Render(JFrame window){
 		GamstCurrent.Render(window);
@@ -29,6 +30,7 @@ public class stateEngine {
 		toGamSt.put(name,user);
 		GamstCurrent = toGamSt.get(name);
 	}
+	
 	
 	
 	

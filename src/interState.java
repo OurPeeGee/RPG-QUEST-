@@ -7,6 +7,6 @@ public interface interState
 	public  void Render(JFrame window);
 	public void gsEnter();
 	public void gsExit();
-	public void Update(float elapT); 
+	public void Update(JFrame window); 
 	
 }
