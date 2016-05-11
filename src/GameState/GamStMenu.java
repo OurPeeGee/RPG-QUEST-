@@ -3,25 +3,15 @@ package GameState;
 //Game State Menu 
 //5/7/2016
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
-public  class GamStMenu extends JPanel implements interState,KeyListener,ActionListener {
+import javax.swing.JFrame;
+
+public  class GamStMenu extends GamSt implements interState {
 			
 	private float movementX;
 	private float movementY=0;
 	
-	public GamStMenu()
-	{
-		addKeyListener(this);
-		setFocusable(true);
-		
-	}
 	public void Render(JFrame window) {
 		// TODO Auto-generated method stub
 		//System.out.println("Menu render");
@@ -48,28 +38,11 @@ public  class GamStMenu extends JPanel implements interState,KeyListener,ActionL
 	}
 	public void Update(JFrame window){
 		// TODO Auto-generated method stub
+		//System.out.println("moved::"+movementX+" "+movementY);
+		System.out.print("u");
+		window.addKeyListener(new UserInput());
+		System.out.print(window.getTitle());
 		
-				
-			
-	}
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		int key = e.getKeyCode();
-		
-	}
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		int key = e.getKeyCode();
-		UserInput force = new UserInput();
-		
-	}
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 }
