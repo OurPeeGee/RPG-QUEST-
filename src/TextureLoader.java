@@ -19,7 +19,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 	private static HashMap<String, BufferedImage[]> tiles = new HashMap<String, BufferedImage[]>();
 	private static HashMap<String, ArrayList<BufferedImage>> levelMaps = new HashMap<String, ArrayList<BufferedImage>>();
 	private static ArrayList<String> LevelNameList = new ArrayList<String>();
-	
+	private static List<TileSet> Tiles = new ArrayList<TileSet>();
 	
 	public static void loadList(){
 		
@@ -58,7 +58,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 		
 		//TODO this method will need to accept a file source.  Another method will call this one giving the file source for EACH Map of the game
 		
-		List<TileSet> Tiles = new ArrayList<TileSet>();
+		
 		//List<BufferedImage> tileImages = new ArrayList<BufferedImage>();
 		int firstGid;
 		String Name;
@@ -90,11 +90,13 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			NodeList nList = document.getElementsByTagName("tileset");
 			int totalTileSets = 0;
 			for(int i = 0; i < nList.getLength(); i++){
+				System.out.println("tilesetsLength : " + nList.getLength());
 				Node node =  nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE){
 					Element eElement = (Element) node;
 					NodeList ImageNodes = document.getElementsByTagName("image");
-					Element eImage = (Element) ImageNodes.item(0);
+					Element eImage = (Element) ImageNodes.item(i);
+					System.out.println("Images Length: " + ImageNodes.getLength());
 					//Element eImage = (Element) ImageNode;
 					//Node ImageNode =  eElement.getFirstChild();
 					//Element eImage = (Element) ImageNode;
@@ -134,16 +136,19 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 						//gr.drawImage(tileBase, 0, 0, 16, 16, 16 * a%32, 16 * a, 16 * a%32 + 16, 16 * a + 16, null);  
 						
 					}
+					tileBase.flush();
 					
 					if(!(tiles.containsKey(Name))){
+						
 						tiles.put(Name,tileset);
-						totalTileSets++;
+						
+						//totalTileSets++;
 					}
 					
 					
 				}
 				
-				
+				totalTileSets++;
 				
 			}
 			
@@ -196,7 +201,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 					}
 					tileLength++;
 				}
-				tileLength++;
+				//tileLength++;
 			String layerName = eLayer.getAttribute("name");
 			//Decide where' we're going to put the layer
 			int layerMap = 0;
@@ -205,7 +210,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			default: break;
 			}
 			
-			int[][] tileCoordinates = new int[24][32];
+			int[][] tileCoordinates = new int[mapHeight][mapWidth];
 			
 			for(int tileY = 0; tileY<mapHeight; tileY++){
 				
@@ -226,7 +231,9 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			//FileInputStream fis = new FileInputStream(file);
 		//BufferedImage[] tileset = new BufferedImage[352];
 			//BufferedImage tileset = ImageIO.read(fis);
-			
+			for(TileSet tileSet1: Tiles){
+				System.out.println(tileSet1.getName());
+			}
 			
 			
 			//BufferedImage screenBitmap = new BufferedImage(mapWidth*16, mapHeight*16, tileset.getType());
@@ -240,14 +247,18 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 					TileSet currentTileSet = null;
 					// only use tiles from this tileset (we get the source image from here)
 					for(TileSet tileSet1: Tiles){
-						if(tileGid >= tileSet1.getFirstGid()-1){
+						System.out.println(tileSet1.getName());
+						//System.out.println(tileSet1.getName());//TODO remove this for loop
+						if(tileGid >= tileSet1.getFirstGid()-1 && tileGid <= tileSet1.getLastGid()){
 							//We found the right tileset for this gid
+							
 							currentTileSet = tileSet1;
+							
 							break;
 						}
 					}
 					
-					
+					//System.out.println(currentTileSet.getName());
 					//img = new BufferedImage()
 					//BufferedImage tile = new BufferedImage(currentTileSet.getTileWidth(), currentTileSet.getTileWidth(), tileset.getType());
 					
@@ -265,6 +276,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 						//System.out.println(tileGid);
 						//g.drawImage(tiles.get(currentTileSet.getName())[tileGid], destX, destY, currentTileSet.getTileWidth(), currentTileSet.getTileWidth(), null);
 						//gList[i] = 
+						
 						Graphics2D g = screenBitmap.createGraphics();
 						g.drawImage(tiles.get(currentTileSet.getName())[tileCoordinates[spriteForY][spriteForX]], destX, destY, currentTileSet.getTileWidth(), currentTileSet.getTileWidth(), null);
 						
@@ -313,7 +325,8 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 				System.out.println(w+ " layers.length: " + layers.size());
 				//may need to limit to constant size of 2 so that we only combine the first 2 layers.
 				gc.drawImage(layers.get(w), 0, 0, null);
-				
+				File outputfile = new File(LName + w + ".png");
+				ImageIO.write(combined, "png", outputfile);
 				
 				
 				
@@ -326,6 +339,8 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			BufferedImage combined2 = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
 			Graphics2D gc2 = combined2.createGraphics();
 			gc2.drawImage(layers.get(layers.size()-1), 0, 0, null);
+			File outputfile = new File(LName + 2 + ".png");
+			ImageIO.write(combined, "png", outputfile);
 			levelMap.add(combined2);
 			combined2.flush();
 			
@@ -336,8 +351,8 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			//gc.drawImage(screenBitmap, 0, 0, null);
 			//gc.finalize();
 		//	levelMaps.add
-		File outputfile = new File("image3.png");
-		ImageIO.write(combined, "png", outputfile);
+	//	File outputfile = new File("image3.png");
+		//ImageIO.write(combined, "png", outputfile);
 			
 			
 			

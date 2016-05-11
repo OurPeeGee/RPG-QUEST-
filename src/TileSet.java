@@ -30,6 +30,9 @@ public class TileSet {
 	public int getFirstGid(){
 		return firstGid;
 	}
+	public int getLastGid(){
+		return lastGid;
+	}
 	public int getTileWidth(){
 		return tileWidth;
 	}
