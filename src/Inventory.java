@@ -2,23 +2,13 @@ import java.lang.*;
 import java.util.*;
 import java.text.*;
 
-public class Inventory extends Item{
+public class Inventory /*extends Item*/{
 	
-	List <Item> Bag= new ArrayList<Item>(30);
+	List <Item> Bag= new ArrayList<Item>(1);
 	public int select=0;
 	public int weight=0;
 	private int end=Bag.size();
-	public Inventory(int ref, String x,String d) {
-		super(ref, x, d);
-		//refnum=ref;
-		//name=x;
-		//Usless shit that needs to be here just so player 
-		//can access the inventory class
-		for(int i=0; i<Bag.size(); i++)
-		{
-			Bag.set(i, null);
-		}
-	}
+	
 	public Item getNext()
 	{
 		select+=1;
@@ -52,5 +42,29 @@ public class Inventory extends Item{
 			
 		}
 	}
-	//weight class
+	public char getPlayerStat1(Item pickup)
+	{
+		return pickup.stat1;
+	}
+	public char getItemFun1(Item pickup)
+	{
+		return pickup.fun1;
+	}
+	public char getPlayerStat2(Item pickup)
+	{
+		return pickup.stat2;
+	}
+	public char getItemFun2(Item pickup)
+	{
+		return pickup.fun2;
+	}
+	public int getModNumber1(Item pickup)
+	{
+		return pickup.num1;
+	}
+	public int getModNumber2(Item pickup)
+	{
+		return pickup.num2;
+	}
+
 }
