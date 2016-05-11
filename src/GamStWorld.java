@@ -1,4 +1,3 @@
-package GameState;
 
 public class GamStWorld extends GamSt implements interState {
 	

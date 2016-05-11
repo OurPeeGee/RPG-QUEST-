@@ -1,4 +1,3 @@
-package GameState;
 import javax.swing.JFrame;
 
 //Erik Olsen, Marcus Moad, Nicholas Marfleet. 

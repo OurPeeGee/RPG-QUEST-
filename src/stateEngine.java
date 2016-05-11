@@ -1,4 +1,3 @@
-package GameState;
 ///Erik Olsen
 ///Game state engine class, allows game states to be added, changed(switch between operating state) updated and rendered. 
 /// 5/8/2016
