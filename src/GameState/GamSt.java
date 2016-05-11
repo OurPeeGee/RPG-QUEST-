@@ -1,3 +1,6 @@
+package GameState;
+import java.awt.event.KeyEvent;
+
 import javax.swing.JFrame;
 
 public class GamSt implements interState {
@@ -12,9 +15,17 @@ public class GamSt implements interState {
 	public void Render(JFrame window) {
 		// TODO Auto-generated method stub		
 	}
-	@Override
 	public void Update(JFrame window) {
 		// TODO Auto-generated method stub
 		
 	}
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		int key = e.getKeyCode();
+		
+	}
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		int key = e.getKeyCode();
+	}	
 }
