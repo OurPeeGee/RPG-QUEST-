@@ -4,6 +4,7 @@ package GameState;
 /// 5/8/2016
 
 import java.util.TreeMap;
+
 import javax.swing.JFrame;
 
 public class stateEngine {
@@ -30,6 +31,9 @@ public class stateEngine {
 		toGamSt.put(name,user);
 		GamstCurrent = toGamSt.get(name);
 	}
+	
+	
+	
 	
 }
 
