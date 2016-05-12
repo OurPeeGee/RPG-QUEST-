@@ -27,14 +27,14 @@ public class Game {
 		*/
 		TextureLoader.loadList();
 		Graphics2DDrawImage.main(null);
-<<<<<<< HEAD
+
 		
-=======
+
 		//test
 	//	}catch(Exception e){
 		//	e.printStackTrace();
 		//}
->>>>>>> refs/remotes/origin/MarcusDev
+
 
 	}
 

@@ -13,7 +13,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 class MyCanvas extends JComponent {
-<<<<<<< HEAD
+
 	private int x;
 	private int y;
 	private Image[] pull = new Image[2];
@@ -30,8 +30,8 @@ public void paint(Graphics g) {
     g2.drawImage(img1, 0, 0, this);
     g2.drawImage(img2,x, y, this);
     g2.finalize();
-=======
 
+/*
   public void paint(Graphics g) {
     //Graphics2D gr = (Graphics2D) g;
     
@@ -56,7 +56,7 @@ public void paint(Graphics g) {
 		
 		
 	}
-	*/
+	*//*
 		ArrayList<String> levels = TextureLoader.getLevelList();
 		String name;
 		System.out.println("size = " + levels.size());
@@ -83,6 +83,7 @@ public void paint(Graphics g) {
 	}catch(Exception e){
 		e.printStackTrace();
 	}
+	*/
 
     //Image img1 = Toolkit.getDefaultToolkit().getImage("resources\\forest_town.png");
     //Image img1 = Toolkit.getDefaultToolkit().getImage("resources\\forest_town.png");
@@ -96,7 +97,7 @@ public void paint(Graphics g) {
    // g2.drawImage(img1, 0, 0, this);
    // g2.drawImage(img2, 200, 200, this);
     //g2.finalize();
->>>>>>> refs/remotes/origin/MarcusDev
+
   }
 }
 

@@ -8,7 +8,7 @@ public class TestDriver {
 	
 	static JFrame window = new JFrame(); 
 	static stateEngine cQuest = new stateEngine(); 
-	static int frameRate=144;/the framerate of the game 
+	static int frameRate=144;//the framerate of the game 
 	static int count = 0;
 	
 	public static void main(String[] args) {
