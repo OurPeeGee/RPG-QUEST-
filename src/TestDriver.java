@@ -8,40 +8,40 @@ public class TestDriver {
 	
 	static JFrame window = new JFrame(); 
 	static stateEngine cQuest = new stateEngine(); 
-	static int frameRate=100;
+	static int frameRate=144;/the framerate of the game 
 	static int count = 0;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
 		
-		//game state for each game mode
+		//game state for everey game mode
 		cQuest.Add("Menu", new GamStMenu());
 		cQuest.Add("World", new GamStWorld());
-		cQuest.change("Menu");
+		cQuest.change("Menu");//changes the selected window to Menu
 		
 		System.out.println("Driver window def");
-		window.setBounds(0,0,1800,900);  
+		window.setBounds(0,0,1800,900);  //initial frame deffinition 
 		
-	    loop42(window);
+	    loop42(window);//game loop call;
 	    	
 	}
-	public static void loop42(JFrame window) 
+	public static void loop42(JFrame window) //Primary game loop 
 	{
-		long loopTime=0;
-		long frameTime=1000/frameRate;
+		long loopTime=0;//time for a single loop to be completed. must be consistantly below the frametime to achieve selected framerate
+		long frameTime=1000/frameRate;//milliseconds bettween frames 
 		int wait=0;
 		while(true)
 		{	
 			long loopStart=System.currentTimeMillis();
 			cQuest.Render(window);
 			//System.out.print("loops this cycle"+loopTime/frameTime+" time ");
-			for(int i=0;i<((int)loopTime/frameTime);i++);
+			for(int i=0;i<((int)loopTime/frameTime);i++);//call the game loop more frequently if the update time is longer than the target frame time
 			{
 				gameLoopUpdate(loopTime);
 				
 			}
-			if(loopTime>=frameTime)
+			if(loopTime>=frameTime)//prevents below zero thread stops 
 			{
 				wait=0;
 			}
@@ -61,9 +61,9 @@ public class TestDriver {
 	}
    public static void gameLoopUpdate(long frameTime){
 	  
-	   for(int i=0;i<((int)frameTime);i++);
+	   for(int i=0;i<((int)frameTime);i++);//changes the game update rate based on hte frame rate. 
 		{
-			cQuest.Update(window);	
+			cQuest.Update(window);//calls update method of 	
 		}		     
    }
 }
