@@ -14,24 +14,24 @@ import javax.swing.JFrame;
 
 class MyCanvas extends JComponent {
 
-	private int x;
-	private int y;
-	private Image[] pull = new Image[2];
-  public MyCanvas(int i, int j,Image[] assets) {
-	  x=i;
-	  y=j;
-	  pull=assets; 
-	}
-public void paint(Graphics g) {
-    Graphics2D g2 = (Graphics2D) g;
+	//private int x;
+	//private int y;
+	//private Image[] pull = new Image[2];
+ // public MyCanvas(int i, int j,Image[] assets) {
+	//  x=i;
+	//  y=j;
+	//  pull=assets; 
+	//}
+//public void paint(Graphics g) {
+  //  Graphics2D g2 = (Graphics2D) g;
 
-    Image img1 = Toolkit.getDefaultToolkit().getImage("resources\\forest_town.png");
-    Image img2 = Toolkit.getDefaultToolkit().getImage("resources\\town_forest_tiles.png");
-    g2.drawImage(img1, 0, 0, this);
-    g2.drawImage(img2,x, y, this);
-    g2.finalize();
+ //   Image img1 = Toolkit.getDefaultToolkit().getImage("resources\\forest_town.png");
+ //   Image img2 = Toolkit.getDefaultToolkit().getImage("resources\\town_forest_tiles.png");
+  //  g2.drawImage(img1, 0, 0, this);
+  //  g2.drawImage(img2,x, y, this);
+  // g2.finalize();
 
-/*
+
   public void paint(Graphics g) {
     //Graphics2D gr = (Graphics2D) g;
     
@@ -56,13 +56,13 @@ public void paint(Graphics g) {
 		
 		
 	}
-	*//*
+	*/
 		ArrayList<String> levels = TextureLoader.getLevelList();
 		String name;
-		System.out.println("size = " + levels.size());
-		int count = 0;
+		//System.out.println("size = " + levels.size());
+		//int count = 0;
 		for(int i = 0; i<levels.size(); i++){
-			System.out.println("MADE IT TO G-LOOP");
+			//System.out.println("MADE IT TO G-LOOP");
 			name = levels.get(i);
 			ArrayList<BufferedImage> layers = TextureLoader.getLevelMap(name);
 			for(int a = 0; a< layers.size(); a++){
@@ -70,20 +70,20 @@ public void paint(Graphics g) {
 				g.drawImage(levelMap,i*512,0, this);
 			}
 			
-		count++;	
+		//count++;	
 		}
-		System.out.println("Count: " + count);
+		//System.out.println("Count: " + count);
 		//BufferedImage levelMap = (BufferedImage)TextureLoader.getLevelMap("resources\\tilemaps\\series1\\testsewer\\SewerTest1.xml").get(0);
 		
 		//gr.drawImage(levelMap,0,0, this);
 		
 		
-	g.finalize();
+	//g.finalize();
 	//Graphics2DDrawImage.main(null);
 	}catch(Exception e){
 		e.printStackTrace();
 	}
-	*/
+	
 
     //Image img1 = Toolkit.getDefaultToolkit().getImage("resources\\forest_town.png");
     //Image img1 = Toolkit.getDefaultToolkit().getImage("resources\\forest_town.png");

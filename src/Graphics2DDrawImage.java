@@ -13,7 +13,7 @@ public class Graphics2DDrawImage {
 	    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	    window.setBounds(10, 0, 2560, 1440);
-	    window.getContentPane().add(new MyCanvas(20,16, null));
+	  //  window.getContentPane().add(new MyCanvas(20,16, null));
 	    window.setVisible(true);
 	    
 	    try {
@@ -23,7 +23,7 @@ public class Graphics2DDrawImage {
 			e.printStackTrace();
 		}
 	    window.getContentPane().removeAll();
-	    window.getContentPane().add(new MyCanvas(1000, 600, null));
+	   // window.getContentPane().add(new MyCanvas(1000, 600, null));
 
 	    window.setBounds(0, 0, 1700, 1030);
 	   // window.getContentPane().add(new MyCanvas());

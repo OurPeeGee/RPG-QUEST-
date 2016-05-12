@@ -16,6 +16,7 @@ public class TestDriver {
 		
 		
 		//game state for everey game mode
+		TextureLoader.loadList();
 		cQuest.Add("Menu", new GamStMenu());
 		cQuest.Add("World", new GamStWorld());
 		cQuest.change("Menu");//changes the selected window to Menu
