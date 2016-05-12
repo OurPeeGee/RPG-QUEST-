@@ -326,8 +326,8 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 				System.out.println(w+ " layers.length: " + layers.size());
 				//may need to limit to constant size of 2 so that we only combine the first 2 layers.
 				gc.drawImage(layers.get(w), 0, 0, null);
-				File outputfile = new File(LName + w + ".png");
-				ImageIO.write(combined, "png", outputfile);
+				//File outputfile = new File(LName + w + ".png");
+			//	ImageIO.write(combined, "png", outputfile);
 				
 				
 				
@@ -340,8 +340,8 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			BufferedImage combined2 = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
 			Graphics2D gc2 = combined2.createGraphics();
 			gc2.drawImage(layers.get(layers.size()-1), 0, 0, null);
-			File outputfile = new File(LName + 2 + ".png");
-			ImageIO.write(combined, "png", outputfile);
+			//File outputfile = new File(LName + 2 + ".png");
+			//ImageIO.write(combined, "png", outputfile);
 			levelMap.add(combined2);
 			combined2.flush();
 			
