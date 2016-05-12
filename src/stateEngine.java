@@ -2,8 +2,9 @@
 ///Game state engine class, allows game states to be added, changed(switch between operating state) updated and rendered. 
 /// 5/8/2016
 
+import java.awt.Component;
 import java.util.TreeMap;
-
+import java.awt.Graphics;
 import javax.swing.JFrame;
 
 public class stateEngine {
@@ -12,12 +13,12 @@ public class stateEngine {
 	
 	static interState GamstCurrent = toGamSt.get("Menu"); 
 	
-	public void Update(JFrame window){//update cycle 
+	public void Update(Component window){//update cycle 
 		GamstCurrent.Update(window); 
 		
 	}
-	public void Render(JFrame window){
-		GamstCurrent.Render(window);
+	public void Render(Graphics g){
+		GamstCurrent.Render(g);
 	}
 	public void change(String name){//changes active gamestate
 		GamstCurrent.gsExit();

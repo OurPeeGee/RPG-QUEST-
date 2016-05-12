@@ -2,6 +2,7 @@
 //Game State Menu 
 //5/7/2016
 
+import java.awt.Component;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
@@ -16,6 +17,7 @@ public  class GamStMenu extends GamSt implements interState {
 		//System.out.println("Menu render");
 		//test
 		//
+		
 	    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    window.setBounds(window.getBounds());
 	    window.getContentPane().add(new MyCanvas());
@@ -36,7 +38,7 @@ public  class GamStMenu extends GamSt implements interState {
 		// TODO Auto-generated method stub
 		System.out.println("Menu exit");
 	}
-	public void Update(JFrame window){
+	public void Update(Component window){
 		// TODO Auto-generated method stub
 		//System.out.println("moved::"+movementX+" "+movementY);
 		//System.out.print("u");

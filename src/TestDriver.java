@@ -2,32 +2,70 @@
 //Driver class to test the Game State framework functionallity gamestate methods. 
 // 5/8/2106
 
-import javax.swing.JFrame;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
-public class TestDriver {
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class TestDriver extends JPanel{
 	
-	static JFrame window = new JFrame(); 
-	static stateEngine cQuest = new stateEngine(); 
-	static int frameRate=144;//the framerate of the game 
-	static int count = 0;
+	//static JFrame window = new JFrame(); 
+	stateEngine cQuest = new stateEngine(); 
+	int frameRate=144;//the framerate of the game 
+	int count = 0;
+	private Component window;
+	private BufferedImage GamePicture = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_ARGB);
+	private Graphics g = GamePicture.createGraphics();
 	
-	public static void main(String[] args) {
+	public TestDriver(){
+		
+		//BufferedImage GamePicture = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = GamePicture.createGraphics();
+        //g2d.setTransform(AffineTransform.getScaleInstance(-1, 1));
+        g2d.drawImage(GamePicture, 0, 0, this);
+        g2d.dispose();
+		
+        
+        
+		
+		
+	}
+	
+	public void start() {
+		
+		JFrame frame = new JFrame("Game Window");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        frame.add(new TestDriver());
+        frame.setSize(1000, 1000);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        window = frame;
 		// TODO Auto-generated method stub
 		
 		
 		//game state for everey game mode
-		TextureLoader.loadList();
+		
 		cQuest.Add("Menu", new GamStMenu());
-		cQuest.Add("World", new GamStWorld());
-		cQuest.change("Menu");//changes the selected window to Menu
+		cQuest.Add("World", new GamStWorld(window));
+		//cQuest.change("Menu");//changes the selected window to Menu
+		//cQuest.change("World");//changes the selected window to Menu
 		
-		System.out.println("Driver window def");
-		window.setBounds(0,0,1800,900);  //initial frame deffinition 
+		//System.out.println("Driver window def");
+		//window.setBounds(0,0,1800,900);  //initial frame deffinition 
 		
-	    loop42(window);//game loop call;
+	    //loop42(window);//game loop call;
+		loop42(window);//game loop call;
 	    	
 	}
-	public static void loop42(JFrame window) //Primary game loop 
+	
+	
+	public void loop42(Component window) //Primary game loop 
 	{
 		long loopTime=0;//time for a single loop to be completed. must be consistantly below the frametime to achieve selected framerate
 		long frameTime=1000/frameRate;//milliseconds bettween frames 
@@ -35,7 +73,7 @@ public class TestDriver {
 		while(true)
 		{	
 			long loopStart=System.currentTimeMillis();
-			cQuest.Render(window);
+			paintComponent(g);
 			//System.out.print("loops this cycle"+loopTime/frameTime+" time ");
 			for(int i=0;i<((int)loopTime/frameTime);i++);//call the game loop more frequently if the update time is longer than the target frame time
 			{
@@ -60,7 +98,21 @@ public class TestDriver {
 			//System.out.println(loopTime);	
 		}
 	}
-   public static void gameLoopUpdate(long frameTime){
+	@Override
+    protected void paintComponent(Graphics g) {
+
+        super.paintComponent(g);
+        
+        cQuest.Render(g);
+        
+        repaint();
+
+        //for (Fish fish : fishes) {
+        //    fish.drawFishImage(g);
+      //  }
+
+    }
+   public void gameLoopUpdate(long frameTime){
 	  
 	   for(int i=0;i<((int)frameTime);i++);//changes the game update rate based on hte frame rate. 
 		{
