@@ -1,3 +1,5 @@
+import java.awt.Component;
+import java.awt.Graphics;
 import javax.swing.JFrame;
 
 public class GamSt implements interState {
@@ -9,11 +11,11 @@ public class GamSt implements interState {
 		// TODO Auto-generated method stub
 	}
 	
-	public void Render(JFrame window) {
+	public void Render(Graphics g) {
 		// TODO Auto-generated method stub		
 	}
 	@Override
-	public void Update(JFrame window) {
+	public void Update(Component window) {
 		// TODO Auto-generated method stub
 		
 	}

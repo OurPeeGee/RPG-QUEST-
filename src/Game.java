@@ -10,6 +10,12 @@ public class Game {
 	public static void main(String[] args) {
 		
 		
+		TextureLoader.loadList();
+		
+		TestDriver game = new TestDriver();
+		game.start();
+		
+		
 		/*
 		try{
 			File file = new File("resources\\tilemaps\\series1\\sewer_1.png");
@@ -24,9 +30,10 @@ public class Game {
 			gr.finalize();
 			
 		}
+		
 		*/
-		TextureLoader.loadList();
-		Graphics2DDrawImage.main(null);
+		//TextureLoader.loadList();
+		//Graphics2DDrawImage.main(null);
 
 		
 
