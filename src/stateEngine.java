@@ -12,20 +12,20 @@ public class stateEngine {
 	
 	static interState GamstCurrent = toGamSt.get("Menu"); 
 	
-	public void Update(JFrame window){
+	public void Update(JFrame window){//update cycle 
 		GamstCurrent.Update(window); 
 		
 	}
 	public void Render(JFrame window){
 		GamstCurrent.Render(window);
 	}
-	public void change(String name){
+	public void change(String name){//changes active gamestate
 		GamstCurrent.gsExit();
 		GamstCurrent = toGamSt.get(name);
 		GamstCurrent.gsEnter();
 	}
 	
-	public void Add(String name, interState user) {
+	public void Add(String name, interState user) {//adds new gamestate if it fits the interStates peramiters 
 		// TODO Auto-generated method stub
 		toGamSt.put(name,user);
 		GamstCurrent = toGamSt.get(name);
