@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<levelList>
+	<level name="SewerLevel1" dataPath="resources/levelData/SewerFix1.xml"/>
+	<level name="LavaRoomLevel1" dataPath="resources/levelData/LavaRoomFix.xml"/>
+</levelList>
