@@ -68,6 +68,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 		int tileHeight;
 		int imageWidth;
 		int imageHeight;
+		double scale=.0625;
 		String ImagePath;
 		//String filePathName = filePath;//"resources\\tilemaps\\series1\\testsewer\\SewerTest1.xml";//TODO TEMPORARY FOR TESTING
 		ArrayList<BufferedImage> levelMap = new ArrayList<BufferedImage>();
@@ -101,11 +102,11 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 					//Node ImageNode =  eElement.getFirstChild();
 					//Element eImage = (Element) ImageNode;
 					Name = eElement.getAttribute("name");
-					firstGid = Integer.parseInt(eElement.getAttribute("firstgid"));
-					tileWidth = Integer.parseInt(eElement.getAttribute("tilewidth"));
-					tileHeight = Integer.parseInt(eElement.getAttribute("tileheight"));
-					imageWidth = Integer.parseInt(eImage.getAttribute("width"));
-					imageHeight = Integer.parseInt(eImage.getAttribute("height"));
+					firstGid =(int) ( Integer.parseInt(eElement.getAttribute("firstgid")));
+					tileWidth =(int) ( Integer.parseInt(eElement.getAttribute("tilewidth")));
+					tileHeight =(int) ( Integer.parseInt(eElement.getAttribute("tileheight")));
+					imageWidth = (int) (Integer.parseInt(eImage.getAttribute("width")));
+					imageHeight = (int) (Integer.parseInt(eImage.getAttribute("height")));
 					ImagePath = eImage.getAttribute("source");
 					//ImagePath = eElement.getFirstChild()
 					TileSet tileSetLoad = new TileSet(firstGid, Name, tileWidth, tileHeight, ImagePath, imageHeight, imageWidth);
@@ -278,7 +279,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 						//gList[i] = 
 						
 						Graphics2D g = screenBitmap.createGraphics();
-						g.drawImage(tiles.get(currentTileSet.getName())[tileCoordinates[spriteForY][spriteForX]], destX, destY, currentTileSet.getTileWidth(), currentTileSet.getTileWidth(), null);
+						g.drawImage(tiles.get(currentTileSet.getName())[tileCoordinates[spriteForY][spriteForX]],(int) (destX*scale),(int) (destY*scale), (int) (currentTileSet.getTileWidth()*scale),(int)( currentTileSet.getTileWidth()*scale), null);
 						
 						//layers.add(e)
 						
