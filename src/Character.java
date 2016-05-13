@@ -4,9 +4,12 @@ import java.text.*;
 
 public class Character extends Entity {
 
-	public int health=4;//four hearts base
+	public int health=100;
 	public int spd= 32;
-	public int dmg = 1;
+	public int dmg = 15;
+	public int lvl=1;
+	public int exp=0;
+	public int dodgerate=25;
 	
 	 public Character(int ref, String x,String d) {
 		super(ref, x, d);

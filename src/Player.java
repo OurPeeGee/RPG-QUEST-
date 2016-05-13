@@ -8,7 +8,7 @@ public class Player extends Character {
 	public int health=6;//start at max hp
 	public static int maxhp=24;
 	public int spd= 32;//pixels per second
-	public int dmg = 2;//2 half hearts per swing
+	public int dmg = 2;//
 	public int size=32;//unchanging
 	public int width=32;//unchanging
 	public int luck=0;//effects drop rates of all items
@@ -27,6 +27,7 @@ public class Player extends Character {
 		Player p1=new Player(0001,"","");
 		p1.setName(scan.next());
 	}
+	
 	public Player(int ref, String x,String d) {
 		super(ref, x, d);
 		refnum=ref;
@@ -39,7 +40,8 @@ public class Player extends Character {
 	public int getRef()
 	{
 		return refnum;
-	}	
+	}
+	
 	public String getName()
 	{
 		return name;
@@ -52,10 +54,10 @@ public class Player extends Character {
 	{
 		return dmg;
 	}
-	public void addItemToStat(Item pickup)
+	public void addItemtoInv(Item pickup)
 	{
 		//stats are as follow s=spd, a= armor, d=dmg,attackspd=k,sheildhits=b(forblock)
-		//h=health g=gold l=luck(secondary only)
+		//h=health g=gold
 		player.addItem(pickup);
 		int num1=player. getModNumber1(pickup);
 		int num2=player. getModNumber2(pickup);
@@ -342,5 +344,22 @@ public class Player extends Character {
 		}
 		return -1;
 	}
+	public void modHealth(Item h)
+	{
+		
+	}
+	public void modSpd(Item s)
+	{
+		
+	}
+	public void modDmg(Item d)
+	{
+		
+	}
+	public void modArmor(Item a)
+	{
+		
+	}
+
 }
 
