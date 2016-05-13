@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
@@ -23,6 +24,8 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 	private static int MapHeight;
 	private static int MapWidth;
 	private static double scale;
+	//private static ArrayList<Rectangle> CollisionTiles = new ArrayList<>();
+	private static HashMap<String, ArrayList<Rectangle>> CollisionMap = new HashMap<String, ArrayList<Rectangle>>();
 	
 	public static void loadList(double SCALE){
 		scale = SCALE;
@@ -180,7 +183,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			BufferedImage screenBitmapTopLayer = new BufferedImage((int)Math.floor(mapWidth*16*scale), (int) Math.floor(mapHeight*16*scale), BufferedImage.TYPE_INT_ARGB);
 			Graphics2D[] gList = new Graphics2D[lList.getLength()];
 			//for(int i = 0; i<1; i++){
-			System.out.println(lList.getLength());
+			//System.out.println(lList.getLength());
 			for(int i = 0; i<lList.getLength(); i++){
 				BufferedImage screenBitmap = new BufferedImage((int)Math.floor(mapWidth*16*scale), (int) Math.floor(mapHeight*16*scale), BufferedImage.TYPE_INT_ARGB);
 				int[] tileArray = new int[mapWidth*mapHeight];//TODO might need to change from a constant to a variable
@@ -237,9 +240,9 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			//FileInputStream fis = new FileInputStream(file);
 		//BufferedImage[] tileset = new BufferedImage[352];
 			//BufferedImage tileset = ImageIO.read(fis);
-			for(TileSet tileSet1: Tiles){
-				System.out.println(tileSet1.getName());
-			}
+			//for(TileSet tileSet1: Tiles){
+			//	System.out.println(tileSet1.getName());
+			//}
 			
 			
 			//BufferedImage screenBitmap = new BufferedImage(mapWidth*16, mapHeight*16, tileset.getType());
@@ -253,7 +256,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 					TileSet currentTileSet = null;
 					// only use tiles from this tileset (we get the source image from here)
 					for(TileSet tileSet1: Tiles){
-						System.out.println(tileSet1.getName());
+					//	System.out.println(tileSet1.getName());
 						//System.out.println(tileSet1.getName());//TODO remove this for loop
 						if(tileGid >= tileSet1.getFirstGid()-1 && tileGid <= tileSet1.getLastGid()){
 							//We found the right tileset for this gid
@@ -328,7 +331,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			Graphics2D gc = combined.createGraphics();
 			//for(int w = 0; w<layers.size(); w++){//This needs to combine the first two layers into the background image
 			for(int w = 0; w<layers.size()-1; w++){//This loop combines already combined images
-				System.out.println(w+ " layers.length: " + layers.size());
+				//System.out.println(w+ " layers.length: " + layers.size());
 				//may need to limit to constant size of 2 so that we only combine the first 2 layers.
 				gc.drawImage(layers.get(w), 0, 0, null);
 				//File outputfile = new File(LName + w + ".png");
@@ -349,6 +352,51 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			//ImageIO.write(combined, "png", outputfile);
 			levelMap.add(combined2);
 			combined2.flush();
+			
+			
+			NodeList OList = document.getElementsByTagName("objectgroup");
+			
+			//This loades the collision rectangles into memory
+			System.out.println(OList.getLength());
+			for(int i = 0; i<OList.getLength(); i++){
+				//System.out.println("UNRECOGNIZED OBJECT TYPE");
+				Node ONode = OList.item(i);
+				Element eObjectList = (Element) ONode;
+				String ObjectGroup = eObjectList.getAttribute("name");
+				switch(ObjectGroup){
+				case "Collision": NodeList OBJECTSLIST = eObjectList.getElementsByTagName("object");
+					ArrayList<Rectangle> CollisionTiles = new ArrayList<>();
+					for(int a = 0; a<OBJECTSLIST.getLength(); a++){
+						Node object = OBJECTSLIST.item(a);
+						Element eObject = (Element) object;
+						Rectangle r = new Rectangle();
+						r.setBounds((int)Math.ceil(Double.parseDouble(eObject.getAttribute("x"))*scale), (int)(Math.ceil(Double.parseDouble(eObject.getAttribute("y"))*scale)), 
+								(int)(Math.ceil(Double.parseDouble(eObject.getAttribute("width"))*scale)), 
+								
+								
+								
+										(int)Math.ceil(16*scale));//(int)Math.ceil(Double.parseDouble(eObject.getAttribute("height"))));
+						CollisionTiles.add(r);
+						
+					}System.out.println("Rectangles");
+					CollisionMap.put(LName, CollisionTiles);
+					break;
+				default: System.out.println("UNRECOGNIZED OBJECT TYPE");			
+				}
+				//NodeList dataList = lList.
+				//Element eLayer = (Element) layer;
+			//	NodeList dataList = eLayer.getElementsByTagName("data");
+				//Node data = dataList.item(0);
+				//Element eData = (Element) data;
+				//NodeList tileList = eData.getElementsByTagName("tile");
+				
+				
+				
+			}
+			
+			//Loading the objects layer
+			
+			
 			
 			
 			//BufferedImage combined = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
@@ -399,6 +447,9 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 	//private BufferedImage createOneTile(String name,){
 		//BufferedImage res = new BufferedImage()
 	//}
+	public static ArrayList<Rectangle> getCollisions(String Name){
+		return CollisionMap.get(Name);
+	}
 	public static int getMapHeight(){
 		return MapHeight;
 	}

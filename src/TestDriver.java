@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 public class TestDriver extends JPanel{
 	
 	//static JFrame window = new JFrame(); 
-	private double scale = 2.5;
+	private double scale = 2;
 	stateEngine cQuest = new stateEngine(); 
 	int frameRate=144;//the framerate of the game 
 	int count = 0;

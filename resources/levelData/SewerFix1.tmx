@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="16" tileheight="16" nextobjectid="1">
  <tileset firstgid="1" name="SewersExtra" tilewidth="16" tileheight="16" tilecount="374" columns="17">
-  <image source="resources/tilemaps/series1/sewer_1.png" width="272" height="352"/>
+  <image source="C:\Users\Erik\dankSpace\RPG-QUEST-\resources\tilemaps\series1/sewer_1.png" width="272" height="352"/>
  </tileset>
  <layer name="TileLayer1" width="32" height="24">
   <data>

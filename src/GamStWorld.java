@@ -4,7 +4,9 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -48,6 +50,9 @@ public class GamStWorld extends GamSt implements interState {
 		
 		g.drawImage(baseLayer, 0, 0, window);
 		g.drawImage(topLayer, 0, 0, window);
+		Rectangle2D r = TextureLoader.getCollisions(name).get(0);
+		g.fillRect((int)r.getX(), (int)r.getY(), (int)r.getWidth(), (int)r.getHeight());
+		g.drawRect((int)r.getX(), (int)r.getY(), (int)r.getWidth(), (int)r.getHeight());
 		
 		
 		

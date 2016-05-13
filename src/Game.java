@@ -15,7 +15,12 @@ public class Game {
 		TestDriver game = new TestDriver();
 		game.start();
 		
-		
+		/*
+		 // Rectangle detection:
+		  public boolean overlaps (Rectangle r) {
+		  	return x < r.x + r.width && x + width > r.x && y < r.y + r.height && y + height > r.y;
+		  }
+		 */
 		/*
 		try{
 			File file = new File("resources\\tilemaps\\series1\\sewer_1.png");
