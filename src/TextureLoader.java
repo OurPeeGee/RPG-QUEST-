@@ -370,12 +370,13 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 						Node object = OBJECTSLIST.item(a);
 						Element eObject = (Element) object;
 						Rectangle r = new Rectangle();
-						r.setBounds((int)Math.ceil(Double.parseDouble(eObject.getAttribute("x"))*scale), (int)(Math.ceil(Double.parseDouble(eObject.getAttribute("y"))*scale)), 
+						r.setBounds((int)Math.ceil(Double.parseDouble(eObject.getAttribute("x"))*scale), 
+								(int)(Math.ceil(Double.parseDouble(eObject.getAttribute("y"))*scale)), 
 								(int)(Math.ceil(Double.parseDouble(eObject.getAttribute("width"))*scale)), 
 								
 								
-								
-										(int)Math.ceil(16*scale));//(int)Math.ceil(Double.parseDouble(eObject.getAttribute("height"))));
+								(int)(Math.ceil(Double.parseDouble(eObject.getAttribute("height"))*scale)));
+										//(int)Math.ceil(16*scale));//(int)Math.ceil(Double.parseDouble(eObject.getAttribute("height"))));
 						CollisionTiles.add(r);
 						
 					}System.out.println("Rectangles");

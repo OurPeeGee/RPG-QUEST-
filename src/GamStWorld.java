@@ -52,9 +52,16 @@ public class GamStWorld extends GamSt implements interState {
 		
 		//TODO draw entities 
 		g.drawImage(topLayer, 0, 0, window);
-		Rectangle2D r = TextureLoader.getCollisions(name).get(0);
-		g.fillRect((int)r.getX(), (int)r.getY(), (int)r.getWidth(), (int)r.getHeight());
-		g.drawRect((int)r.getX(), (int)r.getY(), (int)r.getWidth(), (int)r.getHeight());
+		ArrayList<Rectangle> rects = TextureLoader.getCollisions(name);
+		for(int i = 0; i<rects.size(); i++){
+			Rectangle r = rects.get(i);
+			g.fillRect((int)r.getX(), (int)r.getY(), (int)r.getWidth(), (int)r.getHeight());
+			g.drawRect((int)r.getX(), (int)r.getY(), (int)r.getWidth(), (int)r.getHeight());
+			
+		}
+		
+		//g.fillRect((int)r.getX(), (int)r.getY(), (int)r.getWidth(), (int)r.getHeight());
+		//g.drawRect((int)r.getX(), (int)r.getY(), (int)r.getWidth(), (int)r.getHeight());
 		
 		
 		//TODO need to add event listener for mouse input and keyboard input

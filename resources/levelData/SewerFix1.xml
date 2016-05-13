@@ -2322,7 +2322,7 @@
   <objectgroup name="Collision">
   <object id="3" x="79" y="96" width="79.5" height="17"/>
   <object id="4" x="176.5" y="96" width="120.5" height="16.5"/>
-  <object id="5" x="79" y="96" width="4.5"/>
+  <object id="5" x="79" y="96" width="4.5" height="1"/>
   <object id="6" x="78.5" y="0.5" width="33.5" height="112.5"/>
   <object id="9" x="5" y="-5" width="26" height="249.5"/>
   <object id="10" x="31.5" y="158.5" width="269" height="44.5"/>
