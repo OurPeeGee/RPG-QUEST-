@@ -17,10 +17,8 @@ public class Item extends Entity {
 		refnum= ref;
 		name=x;
 		discript=d;
-		//itemt=itemtype;//the item type
-		//modnum1=modifynum;//the actual number that the mod will apply
 		stat1=modstat1;//the type of stat mod to the player
-		stat2=modstat2;//
+		stat2=modstat2;//s=spd, d=dmg, a=amr, h=health, g=gold
 		num1=modnum1;//the number that will be given
 		num2=modnum2;//
 		fun1=modfun1;//the function applied m=* s=- d=/ a=+
@@ -28,10 +26,9 @@ public class Item extends Entity {
 		
 		/*Notebly you do not have to pass two modding specifications
 		 say the object on the ground is a simple coin then just pass a coin data
-		 c throught the mpd stat and the coin value throught the num
-		 1
-		 and the fun would be the char +
-		 the rest would be  */
+		 g throught the mpd stat and the coin value throught the num 1
+		 and the fun would be the char + the rest would be "" or 0 depending 
+		 as well as addition for all 0 or else game breakdown would insue */
 	}
 	
 }
