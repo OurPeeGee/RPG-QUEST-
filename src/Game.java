@@ -10,7 +10,7 @@ public class Game {
 	public static void main(String[] args) {
 		
 		
-		TextureLoader.loadList();
+		//TextureLoader.loadList();
 		
 		TestDriver game = new TestDriver();
 		game.start();

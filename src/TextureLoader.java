@@ -20,9 +20,12 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 	private static HashMap<String, ArrayList<BufferedImage>> levelMaps = new HashMap<String, ArrayList<BufferedImage>>();
 	private static ArrayList<String> LevelNameList = new ArrayList<String>();
 	private static List<TileSet> Tiles = new ArrayList<TileSet>();
+	private static int MapHeight;
+	private static int MapWidth;
+	private static double scale;
 	
-	public static void loadList(){
-		
+	public static void loadList(double SCALE){
+		scale = SCALE;
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try{
 			DocumentBuilder builder = factory.newDocumentBuilder();
@@ -68,7 +71,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 		int tileHeight;
 		int imageWidth;
 		int imageHeight;
-		double scale=.0625;
+		//double scale=SCALE;
 		String ImagePath;
 		//String filePathName = filePath;//"resources\\tilemaps\\series1\\testsewer\\SewerTest1.xml";//TODO TEMPORARY FOR TESTING
 		ArrayList<BufferedImage> levelMap = new ArrayList<BufferedImage>();
@@ -87,6 +90,8 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			Element eMap = (Element) map;
 			mapWidth = Integer.parseInt(eMap.getAttribute("width"));
 			mapHeight = Integer.parseInt(eMap.getAttribute("height"));
+			MapWidth = mapWidth;
+			MapHeight = mapHeight;
 			//BufferedImage screenBitmap = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
 			NodeList nList = document.getElementsByTagName("tileset");
 			int totalTileSets = 0;
@@ -172,12 +177,12 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			NodeList lList = document.getElementsByTagName("layer");
 			//TODO I think screenBitmap is getting all layers rendered to it prematurely.
 			
-			BufferedImage screenBitmapTopLayer = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
+			BufferedImage screenBitmapTopLayer = new BufferedImage((int)Math.floor(mapWidth*16*scale), (int) Math.floor(mapHeight*16*scale), BufferedImage.TYPE_INT_ARGB);
 			Graphics2D[] gList = new Graphics2D[lList.getLength()];
 			//for(int i = 0; i<1; i++){
 			System.out.println(lList.getLength());
 			for(int i = 0; i<lList.getLength(); i++){
-				BufferedImage screenBitmap = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
+				BufferedImage screenBitmap = new BufferedImage((int)Math.floor(mapWidth*16*scale), (int) Math.floor(mapHeight*16*scale), BufferedImage.TYPE_INT_ARGB);
 				int[] tileArray = new int[mapWidth*mapHeight];//TODO might need to change from a constant to a variable
 				Node layer = lList.item(i);
 				//NodeList dataList = lList.
@@ -319,7 +324,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 				
 			}
 			//This currently combines 2 layers into one BufferedImage
-			BufferedImage combined = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
+			BufferedImage combined = new BufferedImage((int)Math.floor(mapWidth*16*scale), (int) Math.floor(mapHeight*16*scale), BufferedImage.TYPE_INT_ARGB);
 			Graphics2D gc = combined.createGraphics();
 			//for(int w = 0; w<layers.size(); w++){//This needs to combine the first two layers into the background image
 			for(int w = 0; w<layers.size()-1; w++){//This loop combines already combined images
@@ -337,7 +342,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			levelMap.add(combined);
 			combined.flush();
 			
-			BufferedImage combined2 = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
+			BufferedImage combined2 = new BufferedImage((int)Math.floor(mapWidth*16*scale), (int) Math.floor(mapHeight*16*scale), BufferedImage.TYPE_INT_ARGB);
 			Graphics2D gc2 = combined2.createGraphics();
 			gc2.drawImage(layers.get(layers.size()-1), 0, 0, null);
 			//File outputfile = new File(LName + 2 + ".png");
@@ -394,7 +399,13 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 	//private BufferedImage createOneTile(String name,){
 		//BufferedImage res = new BufferedImage()
 	//}
+	public static int getMapHeight(){
+		return MapHeight;
+	}
 	
+	public static int getMapWidth(){
+		return MapWidth;
+	}
 	public static ArrayList<String> getLevelList(){
 		return LevelNameList;
 	}

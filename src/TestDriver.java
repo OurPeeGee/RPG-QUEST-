@@ -15,15 +15,19 @@ import javax.swing.JPanel;
 public class TestDriver extends JPanel{
 	
 	//static JFrame window = new JFrame(); 
+	private double scale = 2.5;
 	stateEngine cQuest = new stateEngine(); 
 	int frameRate=144;//the framerate of the game 
 	int count = 0;
 	private Component window;
-	private BufferedImage GamePicture = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_ARGB);
-	private Graphics g = GamePicture.createGraphics();
+	private BufferedImage GamePicture;
+	private Graphics g;
+
 	
 	public TestDriver(){
-		
+		TextureLoader.loadList(scale);
+		GamePicture = new BufferedImage((int)Math.floor(TextureLoader.getMapWidth()*16*scale), (int) Math.floor(TextureLoader.getMapHeight()*16*scale), BufferedImage.TYPE_INT_ARGB);
+		g = GamePicture.createGraphics();
 		//BufferedImage GamePicture = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = GamePicture.createGraphics();
         //g2d.setTransform(AffineTransform.getScaleInstance(-1, 1));
@@ -42,10 +46,12 @@ public class TestDriver extends JPanel{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.add(new TestDriver());
-        frame.setSize(1000, 1000);
+        //frame.setSize((int)Math.floor(TextureLoader.getMapWidth()*16*scale), (int) Math.floor(TextureLoader.getMapHeight()*16*scale)+2*(int)Math.floor(16*scale));
+        frame.setSize(GamePicture.getWidth(),GamePicture.getHeight());
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         window = frame;
+        
 		// TODO Auto-generated method stub
 		
 		
