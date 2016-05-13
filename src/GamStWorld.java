@@ -46,7 +46,7 @@ public class GamStWorld extends GamSt implements interState {
 	
 	public void Render(Graphics g) {
 		// TODO Auto-generated method stub
-		System.out.println("world render");
+		//System.out.println("world render");
 		
 		g.drawImage(baseLayer, 0, 0, window);
 		
@@ -55,6 +55,7 @@ public class GamStWorld extends GamSt implements interState {
 		ArrayList<Rectangle> rects = TextureLoader.getCollisions(name);
 		for(int i = 0; i<rects.size(); i++){
 			Rectangle r = rects.get(i);
+			
 			g.fillRect((int)r.getX(), (int)r.getY(), (int)r.getWidth(), (int)r.getHeight());
 			g.drawRect((int)r.getX(), (int)r.getY(), (int)r.getWidth(), (int)r.getHeight());
 			
@@ -84,7 +85,7 @@ public class GamStWorld extends GamSt implements interState {
 	public void Update(Component window) {
 		// TODO Auto-generated method stub
 		//Call all of the game logic code
-			System.out.println("world update");
+		//	System.out.println("world update");
 			
 	}
 }

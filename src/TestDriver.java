@@ -13,9 +13,9 @@ import javax.swing.JPanel;
 public class TestDriver extends JPanel{
 	
 	//static JFrame window = new JFrame(); 
-	private double scale = 2;
+	private double scale = 1;
 	stateEngine cQuest = new stateEngine(); 
-	int frameRate=144;//the framerate of the game 
+	private int frameRate=144;//the framerate of the game 
 	int count = 0;
 	private Component window;
 	private BufferedImage GamePicture;
@@ -49,6 +49,7 @@ public class TestDriver extends JPanel{
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         window = frame;
+        this.setDoubleBuffered(true);
         
 		// TODO Auto-generated method stub
 		
@@ -78,7 +79,7 @@ public class TestDriver extends JPanel{
 		{	
 			long loopStart=System.currentTimeMillis();
 			paintComponent(g);
-			//System.out.print("loops this cycle"+loopTime/frameTime+" time ");
+			//System.out.println("loops this cycle"+loopTime/frameTime+" time ");
 			for(int i=0;i<((int)loopTime/frameTime);i++);//call the game loop more frequently if the update time is longer than the target frame time
 			{
 				gameLoopUpdate(loopTime);
@@ -99,7 +100,7 @@ public class TestDriver extends JPanel{
 				e.printStackTrace();
 			}
 			loopTime=System.currentTimeMillis()-loopStart;
-			//System.out.println(loopTime);	
+			//System.out.println(1000/(loopTime+1));	
 		}
 	}
 	@Override
