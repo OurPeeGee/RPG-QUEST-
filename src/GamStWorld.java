@@ -49,13 +49,15 @@ public class GamStWorld extends GamSt implements interState {
 		System.out.println("world render");
 		
 		g.drawImage(baseLayer, 0, 0, window);
+		
+		//TODO draw entities 
 		g.drawImage(topLayer, 0, 0, window);
 		Rectangle2D r = TextureLoader.getCollisions(name).get(0);
 		g.fillRect((int)r.getX(), (int)r.getY(), (int)r.getWidth(), (int)r.getHeight());
 		g.drawRect((int)r.getX(), (int)r.getY(), (int)r.getWidth(), (int)r.getHeight());
 		
 		
-		
+		//TODO need to add event listener for mouse input and keyboard input
 		
 	}
 
@@ -74,7 +76,7 @@ public class GamStWorld extends GamSt implements interState {
 	
 	public void Update(Component window) {
 		// TODO Auto-generated method stub
-		
+		//Call all of the game logic code
 			System.out.println("world update");
 			
 	}
