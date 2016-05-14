@@ -30,6 +30,7 @@ public class TestDriver extends JPanel{
 	
 	public TestDriver(){
 		TextureLoader.loadList(scale);
+		
 		GamePicture = new BufferedImage((int)Math.floor(TextureLoader.getMapWidth()*16*scale), (int) Math.floor(TextureLoader.getMapHeight()*16*scale), BufferedImage.TYPE_INT_ARGB);
 		g = GamePicture.createGraphics();
 		//BufferedImage GamePicture = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_ARGB);
