@@ -7,8 +7,9 @@ public class GamSt implements interState {
 	public void gsEnter() {
 		// TODO Auto-generated method stub
 	}
-	public void gsExit() {
+	public String gsExit() {
 		// TODO Auto-generated method stub
+		return "";
 	}
 	
 	public void Render(Graphics g) {

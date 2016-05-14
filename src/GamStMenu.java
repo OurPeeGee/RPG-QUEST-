@@ -46,9 +46,10 @@ public  class GamStMenu extends GamSt implements interState {
 		// TODO Auto-generated method stub
 		System.out.println("Menu enter");
 	}
-	public void gsExit() {
+	public String gsExit() {
 		// TODO Auto-generated method stub
 		System.out.println("Menu exit");
+		return "";
 	}
 	public void Update(Component window){
 		// TODO Auto-generated method stub

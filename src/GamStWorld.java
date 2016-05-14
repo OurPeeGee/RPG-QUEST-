@@ -29,9 +29,9 @@ import java.awt.event.WindowEvent;
 
 public class GamStWorld extends GamSt implements interState {
 	
-	private ArrayList<String> levels = TextureLoader.getLevelList();
-	private String name = levels.get(0);
-	private ArrayList<BufferedImage> layers = TextureLoader.getLevelMap(name);
+	private ArrayList<String> levels;// = TextureLoader.getLevelList();
+	private String name;// = levels.get(0);
+	private ArrayList<BufferedImage> layers;// = TextureLoader.getLevelMap(name);
 	private Component window;
 	private BufferedImage baseLayer;
 	private BufferedImage transLayer;
@@ -41,17 +41,28 @@ public class GamStWorld extends GamSt implements interState {
 	int A_KEY = KeyEvent.VK_A;
 	int S_KEY = KeyEvent.VK_S;
 	int D_KEY = KeyEvent.VK_D;
-	private PlayerTestEntity player = TestDriver.getPlayer();
-	private ArrayList<Rectangle> LevelCollisions = TextureLoader.getCollisions(name);
-	private ArrayList<Rectangle> Spawns = TextureLoader.getSpawns(name);//This list contains the spawns for the character.  multiple entrances to rooms possible
-	private ArrayList<Rectangle> Exits = TextureLoader.getExitRects(name);
-	private HashMap<String,String> exitPaths = TextureLoader.getExitPaths(name);
+	private PlayerTestEntity player;// = TestDriver.getPlayer();
+	private ArrayList<Rectangle> LevelCollisions;// = TextureLoader.getCollisions(name);
+	private ArrayList<Rectangle> Spawns;// = TextureLoader.getSpawns(name);//This list contains the spawns for the character.  multiple entrances to rooms possible
+	private ArrayList<Rectangle> Exits;// = TextureLoader.getExitRects(name);
+	private HashMap<String,String> exitPaths;// = TextureLoader.getExitPaths(name);
 	private boolean exited = false;
+	private int ExitNum;
+	private Rectangle playerRectangle;
+	private int count = 0;
 	
 	
-	
-	public GamStWorld(Component Gwindow){
-		
+	public GamStWorld(Component Gwindow){//This needs to be passed the level it should open as well. String Name
+		levels = TextureLoader.getLevelList();//This Line and the one directly below it need to be moved to the class that calls GamStWorld.  This will allow the statEngine to determine what the next level is by passing the 
+		name = levels.get(0);//Name of the level to the GamStWorld rather than the list of levels.  This ensures that each GamSt instance only refers to ONE level, and cannot refer to multiple.
+		layers = TextureLoader.getLevelMap(name);
+		player = TestDriver.getPlayer();
+		LevelCollisions = TextureLoader.getCollisions(name);
+		Spawns = TextureLoader.getSpawns(name);
+		Exits = TextureLoader.getExitRects(name);
+		exitPaths = TextureLoader.getExitPaths(name);
+		playerRectangle = new Rectangle((int)TestDriver.getPlayer().getPlayer().getX(), (int)TestDriver.getPlayer().getPlayer().getY(), (int)TestDriver.getPlayer().getPlayer().getWidth(),(int) TestDriver.getPlayer().getPlayer().getHeight());
+		//input.update();
 		gsEnter();
 		this.window = Gwindow;
 		
@@ -73,17 +84,11 @@ public class GamStWorld extends GamSt implements interState {
 		//System.out.println("world render");
 		
 		g.drawImage(baseLayer, 0, 0, window);
+		count++;
+		System.out.println(count);
+		//g.fillRect((int)TestDriver.getPlayer().getPlayer().getX(), (int)TestDriver.getPlayer().getPlayer().getY(), (int)TestDriver.getPlayer().getPlayer().getWidth(),(int) TestDriver.getPlayer().getPlayer().getHeight());
+		g.fillRect((int)playerRectangle.getX(), (int)playerRectangle.getY(), (int)playerRectangle.getWidth(), (int)playerRectangle.getHeight());
 		
-		g.fillRect((int)TestDriver.getPlayer().getPlayer().getX(), (int)TestDriver.getPlayer().getPlayer().getY(), (int)TestDriver.getPlayer().getPlayer().getWidth(),(int) TestDriver.getPlayer().getPlayer().getHeight());
-		
-		for(int i = 0; exited!=true&&i<Exits.size(); i++){
-			Rectangle r = Exits.get(i);
-			if(TestDriver.getPlayer().getPlayer().intersects(r)){
-				System.out.println(exitPaths.get("Exit"+Integer.toString(i)));
-				exited = true;
-				break;
-			}
-		}
 		//TODO draw entities 
 		g.drawImage(topLayer, 0, 0, window);
 		
@@ -106,7 +111,7 @@ public class GamStWorld extends GamSt implements interState {
 	}
 
 	
-	public void gsEnter() {
+	public void gsEnter() {//TODO need to set a 
 		// TODO Auto-generated method stub
 		player.SPAWN((int)Spawns.get(0).getX(),(int)Spawns.get(0).getY());
 		player.UpdateCollision(LevelCollisions);
@@ -114,9 +119,10 @@ public class GamStWorld extends GamSt implements interState {
 	}
 
 
-	public void gsExit() {
+	public String gsExit() {
 		// TODO Auto-generated method stub
 		System.out.println("world exit");
+		return Integer.toString(ExitNum);
 	}
 
 	
@@ -125,6 +131,17 @@ public class GamStWorld extends GamSt implements interState {
 		//Call all of the game logic code
 		//InputManager inputs = InputManager.getInstance();
 		InputManager inputs  = (InputManager) (window.getKeyListeners()[0]);
+		
+		for(int i = 0; exited!=true&&i<Exits.size(); i++){
+			Rectangle r = Exits.get(i);
+			if(TestDriver.getPlayer().getPlayer().intersects(r)){//TODO will need to have stateEngine.change() called.  
+				System.out.println(exitPaths.get("Exit"+i));
+				ExitNum = i;
+				exited = true;//Set here to prevent multiple exit detections
+				stateEngine.change(exitPaths.get("Exit"+i));
+				break;
+			}
+		}
 		//if(inputs!=null&&inputs.isAnyKeyDown()){
 			//System.out.println("SOME KEY IS DOWN");
 			if(inputs.isKeyDown(KeyEvent.VK_W)) {
@@ -148,7 +165,8 @@ public class GamStWorld extends GamSt implements interState {
 				//++count;
 				//System.out.println("Spacebar is down");
 			}
-			//input.update();
+			playerRectangle.setBounds((int)TestDriver.getPlayer().getPlayer().getX(), (int)TestDriver.getPlayer().getPlayer().getY(), (int)TestDriver.getPlayer().getPlayer().getWidth(),(int) TestDriver.getPlayer().getPlayer().getHeight());
+			
 			
 		//}
 		

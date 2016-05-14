@@ -15,9 +15,9 @@ public class TestDriver extends JPanel{
 	
 	//static JFrame window = new JFrame(); 
 	private static double scale = 2;
-	stateEngine cQuest = new stateEngine(); 
-	private int frameRate=144;//the framerate of the game 
-	int count = 0;
+	//stateEngine cQuest = new stateEngine(); 
+	private int frameRate=10;//the framerate of the game //Marcus: Somehow the physics of the game is tied to framerate.  I don't know if it is my code or the way this driver works that is causing it.
+	int count = 0;//I did some test and it turns out that the gameUpdate is bound by the framerate value and the Render function is NOT.  This means that frameRate actually sets the rate of the game physics.
 	private Component window;
 	private BufferedImage GamePicture;
 	private Graphics g;
@@ -61,8 +61,8 @@ public class TestDriver extends JPanel{
         window.addKeyListener(input);
         COMPONENT.addKeyListener(input);
         this.setDoubleBuffered(true);
-        cQuest.Add("Menu", new GamStMenu());
-		cQuest.Add("World", new GamStWorld(window));
+        stateEngine.Add("Menu", new GamStMenu());
+        stateEngine.Add("World", new GamStWorld(window));
       //  this.addComponentListener(new ComponentAdapter(){
         	//public void componentShown(Component window) {
         	//	loop42(window);//game loop call;
@@ -131,7 +131,7 @@ public class TestDriver extends JPanel{
 
         super.paintComponent(g);
         
-        cQuest.Render(g);
+        stateEngine.Render(g);
         
         repaint();
 
@@ -147,7 +147,7 @@ public class TestDriver extends JPanel{
 	  
 	   for(int i=0;i<((int)frameTime);i++);//changes the game update rate based on hte frame rate. 
 		{
-			cQuest.Update(window);//calls update method of 	
+			stateEngine.Update(window);//calls update method of 	
 		}		     
    }
 }

@@ -19,7 +19,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 	
 	private static HashMap<String, BufferedImage[]> tiles = new HashMap<String, BufferedImage[]>();
 	private static HashMap<String, ArrayList<BufferedImage>> levelMaps = new HashMap<String, ArrayList<BufferedImage>>();
-	private static ArrayList<String> LevelNameList = new ArrayList<String>();
+	private static ArrayList<String> LevelNameList = new ArrayList<String>();//This needs to be a hashmap.
 	private static List<TileSet> Tiles = new ArrayList<TileSet>();
 	private static int MapHeight;
 	private static int MapWidth;
