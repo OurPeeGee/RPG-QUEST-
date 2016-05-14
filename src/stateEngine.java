@@ -9,9 +9,9 @@ import javax.swing.JFrame;
 
 public class stateEngine {
 	
-	static TreeMap<String, interState> toGamSt = new TreeMap<String, interState>();//Map paths (name of Game State as a string TO, the state class(as  
+	private static TreeMap<String, interState> toGamSt = new TreeMap<String, interState>();//Map paths (name of Game State as a string TO, the state class(as  
 	
-	static interState GamstCurrent = toGamSt.get("Menu"); 
+	private static interState GamstCurrent = toGamSt.get("Menu"); 
 	
 	public void Update(Component window){//update cycle 
 		GamstCurrent.Update(window); 

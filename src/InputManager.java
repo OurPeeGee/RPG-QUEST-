@@ -28,7 +28,7 @@ public class InputManager implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 		 //System.out.println("InputManager: A key has been pressed code=" + e.getKeyCode());
 		 if( e.getKeyCode() >= 0 && e.getKeyCode() < 256 ) {
-			 System.out.println("SOME KEY GOT PRESSED");
+			// System.out.println("SOME KEY GOT PRESSED");
 			 keys[e.getKeyCode()] = (int) System.currentTimeMillis();
 			 key_state_down[e.getKeyCode()] = true;
 			 key_state_up[e.getKeyCode()] = false;

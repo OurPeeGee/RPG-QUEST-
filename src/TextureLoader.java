@@ -27,7 +27,8 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 	//private static ArrayList<Rectangle> CollisionTiles = new ArrayList<>();
 	private static HashMap<String, ArrayList<Rectangle>> CollisionMap = new HashMap<String, ArrayList<Rectangle>>();
 	private static HashMap<String, ArrayList<Rectangle>> SpawnMap = new HashMap<String, ArrayList<Rectangle>>();
-	
+	private static HashMap<String, ArrayList<Rectangle>> ExitMap = new HashMap<String, ArrayList<Rectangle>>();
+	private static HashMap<String, HashMap<String, String>> ExitPathMap = new HashMap<String, HashMap<String, String>>();
 	public static void loadList(double SCALE){
 		scale = SCALE;
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -96,6 +97,33 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			mapHeight = Integer.parseInt(eMap.getAttribute("height"));
 			MapWidth = mapWidth;
 			MapHeight = mapHeight;
+			NodeList property = document.getElementsByTagName("properties");
+			if(property.getLength()>0){
+				
+			
+				Element eProp = (Element) property.item(0);
+				NodeList pList = eProp.getElementsByTagName("property");
+				HashMap<String, String> exitPaths = new HashMap<String, String>();
+				System.out.println("PropertiesLength: " + pList.getLength());
+				for(int i = 0; i<pList.getLength(); i++){
+					
+					Node pNode = pList.item(i);
+					if (pNode.getNodeType() == Node.ELEMENT_NODE){
+						
+						Element eProperty = (Element) pNode;
+						exitPaths.put(eProperty.getAttribute("name"), eProperty.getAttribute("value"));
+						//exitPaths.add(arg0)
+						
+						
+						
+					}
+					
+					
+					
+					
+				}
+				ExitPathMap.put(LName, exitPaths);
+			}
 			//BufferedImage screenBitmap = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
 			NodeList nList = document.getElementsByTagName("tileset");
 			int totalTileSets = 0;
@@ -385,7 +413,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 					break;
 				case"Spawn":
 					NodeList SpawnsList = eObjectList.getElementsByTagName("object");
-					ArrayList<Rectangle> SpawnRectList = new ArrayList<>();
+					ArrayList<Rectangle> SpawnRectList = new ArrayList<Rectangle>();
 					for(int a = 0; a<SpawnsList.getLength(); a++){
 						Node object = SpawnsList.item(a);
 						Element eObject = (Element) object;
@@ -399,6 +427,23 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 						
 					}System.out.println("SpawnRectangles");
 					SpawnMap.put(LName, SpawnRectList);
+					break;
+				case"LevelExit":
+					NodeList ExitList = eObjectList.getElementsByTagName("object");
+					ArrayList<Rectangle> ExitRectList = new ArrayList<Rectangle>();
+					for(int a = 0; a<ExitList.getLength(); a++){
+						Node object = ExitList.item(a);
+						Element eObject = (Element) object;
+						Rectangle r = new Rectangle();
+						r.setBounds((int)Math.ceil(Double.parseDouble(eObject.getAttribute("x"))*scale), 
+							(int)(Math.ceil(Double.parseDouble(eObject.getAttribute("y"))*scale)), 
+							(int)(Math.ceil(Double.parseDouble(eObject.getAttribute("width"))*scale)), 
+							(int)(Math.ceil(Double.parseDouble(eObject.getAttribute("height"))*scale)));
+										//(int)Math.ceil(16*scale));//(int)Math.ceil(Double.parseDouble(eObject.getAttribute("height"))));
+						ExitRectList.add(r);
+						
+					}System.out.println("SpawnRectangles");
+					ExitMap.put(LName, ExitRectList);
 					break;
 				default: System.out.println("UNRECOGNIZED OBJECT TYPE");			
 				}
@@ -466,6 +511,18 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 	//private BufferedImage createOneTile(String name,){
 		//BufferedImage res = new BufferedImage()
 	//}
+	public static String getExitPath(String mapName, String exitName){
+		return ExitPathMap.get(mapName).get(exitName);
+	}
+	
+	public static HashMap<String,String> getExitPaths(String mapName){
+		return ExitPathMap.get(mapName);
+	}
+	
+	public static ArrayList<Rectangle> getExitRects(String Name){
+		return ExitMap.get(Name);
+	}
+	
 	public static ArrayList<Rectangle> getCollisions(String Name){
 		return CollisionMap.get(Name);
 	}

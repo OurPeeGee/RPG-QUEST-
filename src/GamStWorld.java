@@ -1,5 +1,6 @@
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -43,6 +44,10 @@ public class GamStWorld extends GamSt implements interState {
 	private PlayerTestEntity player = TestDriver.getPlayer();
 	private ArrayList<Rectangle> LevelCollisions = TextureLoader.getCollisions(name);
 	private ArrayList<Rectangle> Spawns = TextureLoader.getSpawns(name);//This list contains the spawns for the character.  multiple entrances to rooms possible
+	private ArrayList<Rectangle> Exits = TextureLoader.getExitRects(name);
+	private HashMap<String,String> exitPaths = TextureLoader.getExitPaths(name);
+	private boolean exited = false;
+	
 	
 	
 	public GamStWorld(Component Gwindow){
@@ -71,17 +76,26 @@ public class GamStWorld extends GamSt implements interState {
 		
 		g.fillRect((int)TestDriver.getPlayer().getPlayer().getX(), (int)TestDriver.getPlayer().getPlayer().getY(), (int)TestDriver.getPlayer().getPlayer().getWidth(),(int) TestDriver.getPlayer().getPlayer().getHeight());
 		
+		for(int i = 0; exited!=true&&i<Exits.size(); i++){
+			Rectangle r = Exits.get(i);
+			if(TestDriver.getPlayer().getPlayer().intersects(r)){
+				System.out.println(exitPaths.get("Exit"+Integer.toString(i)));
+				exited = true;
+				break;
+			}
+		}
 		//TODO draw entities 
 		g.drawImage(topLayer, 0, 0, window);
 		
-		ArrayList<Rectangle> rects = TextureLoader.getCollisions(name);
-		//for(int i = 0; i<rects.size(); i++){
-		//	Rectangle r = rects.get(i);
+		//ArrayList<Rectangle> rects = TextureLoader.getCollisions(name);
+		//ArrayList<Rectangle> rects = TextureLoader.getExitRects(name);
+		//for(int i = 0; i<Exits.size(); i++){
+			//Rectangle r = Exits.get(i);
 			
-			//g.fillRect((int)r.getX(), (int)r.getY(), (int)r.getWidth(), (int)r.getHeight());
+		//	g.fillRect((int)r.getX(), (int)r.getY(), (int)r.getWidth(), (int)r.getHeight());
 			//g.drawRect((int)r.getX(), (int)r.getY(), (int)r.getWidth(), (int)r.getHeight());
 			
-		//}
+	//	}
 		
 		//g.fillRect((int)r.getX(), (int)r.getY(), (int)r.getWidth(), (int)r.getHeight());
 		//g.drawRect((int)r.getX(), (int)r.getY(), (int)r.getWidth(), (int)r.getHeight());
