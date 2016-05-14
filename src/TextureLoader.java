@@ -26,6 +26,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 	private static double scale;
 	//private static ArrayList<Rectangle> CollisionTiles = new ArrayList<>();
 	private static HashMap<String, ArrayList<Rectangle>> CollisionMap = new HashMap<String, ArrayList<Rectangle>>();
+	private static HashMap<String, ArrayList<Rectangle>> SpawnMap = new HashMap<String, ArrayList<Rectangle>>();
 	
 	public static void loadList(double SCALE){
 		scale = SCALE;
@@ -382,6 +383,23 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 					}System.out.println("Rectangles");
 					CollisionMap.put(LName, CollisionTiles);
 					break;
+				case"Spawn":
+					NodeList SpawnsList = eObjectList.getElementsByTagName("object");
+					ArrayList<Rectangle> SpawnRectList = new ArrayList<>();
+					for(int a = 0; a<SpawnsList.getLength(); a++){
+						Node object = SpawnsList.item(a);
+						Element eObject = (Element) object;
+						Rectangle r = new Rectangle();
+						r.setBounds((int)Math.ceil(Double.parseDouble(eObject.getAttribute("x"))*scale), 
+							(int)(Math.ceil(Double.parseDouble(eObject.getAttribute("y"))*scale)), 
+							(int)(Math.ceil(Double.parseDouble(eObject.getAttribute("width"))*scale)), 
+							(int)(Math.ceil(Double.parseDouble(eObject.getAttribute("height"))*scale)));
+										//(int)Math.ceil(16*scale));//(int)Math.ceil(Double.parseDouble(eObject.getAttribute("height"))));
+						SpawnRectList.add(r);
+						
+					}System.out.println("SpawnRectangles");
+					SpawnMap.put(LName, SpawnRectList);
+					break;
 				default: System.out.println("UNRECOGNIZED OBJECT TYPE");			
 				}
 				//NodeList dataList = lList.
@@ -451,6 +469,11 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 	public static ArrayList<Rectangle> getCollisions(String Name){
 		return CollisionMap.get(Name);
 	}
+	
+	public static ArrayList<Rectangle> getSpawns(String Name){
+		return SpawnMap.get(Name);
+	}
+	
 	public static int getMapHeight(){
 		return MapHeight;
 	}

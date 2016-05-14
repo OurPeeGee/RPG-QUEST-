@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ComponentAdapter;
 import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,14 +14,19 @@ import javax.swing.JPanel;
 public class TestDriver extends JPanel{
 	
 	//static JFrame window = new JFrame(); 
-	private double scale = 1;
+	private static double scale = 2;
 	stateEngine cQuest = new stateEngine(); 
 	private int frameRate=144;//the framerate of the game 
 	int count = 0;
 	private Component window;
 	private BufferedImage GamePicture;
 	private Graphics g;
+	private InputManager input;
+	private static PlayerTestEntity player = new PlayerTestEntity();
 
+	public static PlayerTestEntity getPlayer(){
+		return player;
+	}
 	
 	public TestDriver(){
 		TextureLoader.loadList(scale);
@@ -39,37 +45,53 @@ public class TestDriver extends JPanel{
 	}
 	
 	public void start() {
-		
+		input = new InputManager();
+		Component COMPONENT = new TestDriver();
 		JFrame frame = new JFrame("Game Window");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
-        frame.add(new TestDriver());
+        frame.add(COMPONENT);
         //frame.setSize((int)Math.floor(TextureLoader.getMapWidth()*16*scale), (int) Math.floor(TextureLoader.getMapHeight()*16*scale)+2*(int)Math.floor(16*scale));
         frame.setSize(GamePicture.getWidth(),GamePicture.getHeight());
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         window = frame;
+        this.addKeyListener(input);
+        window.addKeyListener(input);
+        COMPONENT.addKeyListener(input);
         this.setDoubleBuffered(true);
+        cQuest.Add("Menu", new GamStMenu());
+		cQuest.Add("World", new GamStWorld(window));
+      //  this.addComponentListener(new ComponentAdapter(){
+        	//public void componentShown(Component window) {
+        	//	loop42(window);//game loop call;
+		//	}
+      //  });
+       
         
 		// TODO Auto-generated method stub
 		
 		
 		//game state for everey game mode
 		
-		cQuest.Add("Menu", new GamStMenu());
-		cQuest.Add("World", new GamStWorld(window));
+		
 		//cQuest.change("Menu");//changes the selected window to Menu
 		//cQuest.change("World");//changes the selected window to Menu
 		
 		//System.out.println("Driver window def");
 		//window.setBounds(0,0,1800,900);  //initial frame deffinition 
 		
-	    //loop42(window);//game loop call;
-		loop42(window);//game loop call;
+	    loop42(window);//game loop call;
+		//loop42(window);//game loop call;
 	    	
 	}
 	
 	
+	//private void addComponentListener(ComponentAdapter componentAdapter) {
+	//	// TODO Auto-generated method stub
+		
+	//}
+
 	public void loop42(Component window) //Primary game loop 
 	{
 		long loopTime=0;//time for a single loop to be completed. must be consistantly below the frametime to achieve selected framerate
@@ -117,6 +139,9 @@ public class TestDriver extends JPanel{
       //  }
 
     }
+	public static double getScale(){
+		return scale;
+	}
    public void gameLoopUpdate(long frameTime){
 	  
 	   for(int i=0;i<((int)frameTime);i++);//changes the game update rate based on hte frame rate. 

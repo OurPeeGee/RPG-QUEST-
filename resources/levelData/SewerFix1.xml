@@ -2319,16 +2319,20 @@
    <tile gid="29"/>
   </data>
  </layer>
-  <objectgroup name="Collision">
-  <object id="3" x="79" y="96" width="79.5" height="17"/>
-  <object id="4" x="176.5" y="96" width="120.5" height="16.5"/>
-  <object id="5" x="79" y="96" width="4.5" height="1"/>
-  <object id="6" x="78.5" y="0.5" width="33.5" height="112.5"/>
-  <object id="9" x="5" y="-5" width="26" height="249.5"/>
-  <object id="10" x="31.5" y="158.5" width="269" height="44.5"/>
-  <object id="11" x="255.5" y="88.5" width="57.5" height="106"/>
-  <object id="13" x="5" y="-12.5" width="166" height="12.5"/>
-  <object id="15" x="27" y="159" width="31.5" height="20.5"/>
-  <object id="17" x="149.5" y="80" width="35" height="14"/>
+ <objectgroup name="Collision">
+  <object id="13" x="-12" y="122.667" width="11.6667" height="28.3333"/>
+  <object id="16" x="156.333" y="240.333" width="25" height="6.66667"/>
+  <object id="17" x="175.333" y="158" width="81" height="82"/>
+  <object id="18" x="256" y="112" width="15" height="49.3333"/>
+  <object id="20" x="173.667" y="76.3636" width="82.3333" height="35.9919"/>
+  <object id="21" x="154.333" y="86.6667" width="33.6667" height="9.33333"/>
+  <object id="25" x="79.6667" y="0" width="82" height="112.289"/>
+  <object id="26" x="-0.333333" y="-0.101432" width="32.3292" height="127.821"/>
+  <object id="27" x="0.000400916" y="143.738" width="31.9058" height="25.0301"/>
+  <object id="28" x="32.3333" y="158" width="128.333" height="84"/>
+  <object id="29" x="27" y="-4" width="62" height="4"/>
+ </objectgroup>
+ <objectgroup name="Spawn">
+  <object id="12" x="61" y="125" width="5.66667" height="5.66667"/>
  </objectgroup>
 </map>
