@@ -251,7 +251,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 					}
 					tileLength++;
 				}
-				//tileLength++;
+				//tileLength++;s
 			String layerName = eLayer.getAttribute("name");
 			//Decide where' we're going to put the layer
 			int layerMap = 0;
