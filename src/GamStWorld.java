@@ -48,20 +48,21 @@ public class GamStWorld extends GamSt implements interState {
 	private HashMap<String,String> exitPaths;// = TextureLoader.getExitPaths(name);
 	private boolean exited = false;
 	private int ExitNum;
-	private Rectangle playerRectangle;
-	private int count = 0;
+	//private Rectangle playerRectangle;
+	//private int count = 0;
 	
 	
 	public GamStWorld(Component Gwindow){//This needs to be passed the level it should open as well. String Name
-		levels = TextureLoader.getLevelList();//This Line and the one directly below it need to be moved to the class that calls GamStWorld.  This will allow the statEngine to determine what the next level is by passing the 
-		name = levels.get(0);//Name of the level to the GamStWorld rather than the list of levels.  This ensures that each GamSt instance only refers to ONE level, and cannot refer to multiple.
+		//levels = TextureLoader.getLevelList();//This Line and the one directly below it need to be moved to the class that calls GamStWorld.  This will allow the statEngine to determine what the next level is by passing the 
+		//name = levels.get(0);//Name of the level to the GamStWorld rather than the list of levels.  This ensures that each GamSt instance only refers to ONE level, and cannot refer to multiple.
+		name = stateEngine.getCurrentLevel();
 		layers = TextureLoader.getLevelMap(name);
 		player = TestDriver.getPlayer();
 		LevelCollisions = TextureLoader.getCollisions(name);
 		Spawns = TextureLoader.getSpawns(name);
 		Exits = TextureLoader.getExitRects(name);
 		exitPaths = TextureLoader.getExitPaths(name);
-		playerRectangle = new Rectangle((int)TestDriver.getPlayer().getPlayer().getX(), (int)TestDriver.getPlayer().getPlayer().getY(), (int)TestDriver.getPlayer().getPlayer().getWidth(),(int) TestDriver.getPlayer().getPlayer().getHeight());
+		//playerRectangle = new Rectangle((int)TestDriver.getPlayer().getPlayer().getX(), (int)TestDriver.getPlayer().getPlayer().getY(), (int)TestDriver.getPlayer().getPlayer().getWidth(),(int) TestDriver.getPlayer().getPlayer().getHeight());
 		//input.update();
 		gsEnter();
 		this.window = Gwindow;
@@ -84,10 +85,10 @@ public class GamStWorld extends GamSt implements interState {
 		//System.out.println("world render");
 		
 		g.drawImage(baseLayer, 0, 0, window);
-		count++;
-		System.out.println(count);
-		//g.fillRect((int)TestDriver.getPlayer().getPlayer().getX(), (int)TestDriver.getPlayer().getPlayer().getY(), (int)TestDriver.getPlayer().getPlayer().getWidth(),(int) TestDriver.getPlayer().getPlayer().getHeight());
-		g.fillRect((int)playerRectangle.getX(), (int)playerRectangle.getY(), (int)playerRectangle.getWidth(), (int)playerRectangle.getHeight());
+		//count++;
+		//System.out.println(count);
+		g.fillRect((int)TestDriver.getPlayer().getPlayer().getX(), (int)TestDriver.getPlayer().getPlayer().getY(), (int)TestDriver.getPlayer().getPlayer().getWidth(),(int) TestDriver.getPlayer().getPlayer().getHeight());
+		//g.fillRect((int)playerRectangle.getX(), (int)playerRectangle.getY(), (int)playerRectangle.getWidth(), (int)playerRectangle.getHeight());
 		
 		//TODO draw entities 
 		g.drawImage(topLayer, 0, 0, window);
@@ -113,6 +114,18 @@ public class GamStWorld extends GamSt implements interState {
 	
 	public void gsEnter() {//TODO need to set a 
 		// TODO Auto-generated method stub
+		name = stateEngine.getCurrentLevel();
+		layers = TextureLoader.getLevelMap(name);
+		player = TestDriver.getPlayer();
+		LevelCollisions = TextureLoader.getCollisions(name);
+		Spawns = TextureLoader.getSpawns(name);
+		Exits = TextureLoader.getExitRects(name);
+		exitPaths = TextureLoader.getExitPaths(name);
+		
+		baseLayer = layers.get(0);
+		//transLayer = layers.get(1);
+		topLayer = layers.get(1);
+		
 		player.SPAWN((int)Spawns.get(0).getX(),(int)Spawns.get(0).getY());
 		player.UpdateCollision(LevelCollisions);
 		System.out.println("world enter");
@@ -137,8 +150,9 @@ public class GamStWorld extends GamSt implements interState {
 			if(TestDriver.getPlayer().getPlayer().intersects(r)){//TODO will need to have stateEngine.change() called.  
 				System.out.println(exitPaths.get("Exit"+i));
 				ExitNum = i;
-				exited = true;//Set here to prevent multiple exit detections
-				stateEngine.change(exitPaths.get("Exit"+i));
+				stateEngine.change("World", exitPaths.get("Exit"+i));
+				//exited = true;//Set here to prevent multiple exit detections
+				
 				break;
 			}
 		}
@@ -165,7 +179,7 @@ public class GamStWorld extends GamSt implements interState {
 				//++count;
 				//System.out.println("Spacebar is down");
 			}
-			playerRectangle.setBounds((int)TestDriver.getPlayer().getPlayer().getX(), (int)TestDriver.getPlayer().getPlayer().getY(), (int)TestDriver.getPlayer().getPlayer().getWidth(),(int) TestDriver.getPlayer().getPlayer().getHeight());
+			//playerRectangle.setBounds((int)TestDriver.getPlayer().getPlayer().getX(), (int)TestDriver.getPlayer().getPlayer().getY(), (int)TestDriver.getPlayer().getPlayer().getWidth(),(int) TestDriver.getPlayer().getPlayer().getHeight());
 			
 			
 		//}
