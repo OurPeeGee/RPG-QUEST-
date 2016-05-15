@@ -442,7 +442,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 										//(int)Math.ceil(16*scale));//(int)Math.ceil(Double.parseDouble(eObject.getAttribute("height"))));
 						ExitRectList.add(r);
 						
-					}System.out.println("SpawnRectangles");
+					}System.out.println("LevelExitRectangles");
 					ExitMap.put(LName, ExitRectList);
 					break;
 				default: System.out.println("UNRECOGNIZED OBJECT TYPE");			

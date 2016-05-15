@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="16" tileheight="16" nextobjectid="48">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="16" tileheight="16" nextobjectid="49">
  <properties>
-  <property name="Exit0" value="ONE"/>
-  <property name="Exit1" value="TWO"/>
-  <property name="Exit2" value="THREE"/>
-  <property name="Exit3" value="FOUR"/>
-  <property name="Exit4" value="FIVE"/>
+  <property name="Exit0" value="LavaRoomLevel1"/>
+  <property name="Exit1" value="LavaRoomLevel1"/>
+  <property name="Exit2" value="LavaRoomLevel1"/>
+  <property name="Exit3" value="LavaRoomLevel1"/>
+  <property name="Exit4" value="LavaRoomLevel1"/>
  </properties>
  <tileset firstgid="1" name="SewersExtra" tilewidth="16" tileheight="16" tilecount="374" columns="17">
   <image source="../tilemaps/series1/sewer_1.png" width="272" height="352"/>
@@ -1113,8 +1113,9 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="48"/>
    <tile gid="27"/>
+   <tile gid="50"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1144,9 +1145,9 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="65"/>
    <tile gid="27"/>
+   <tile gid="67"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1176,9 +1177,9 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="65"/>
    <tile gid="27"/>
+   <tile gid="67"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1208,9 +1209,9 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="65"/>
    <tile gid="27"/>
+   <tile gid="67"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1240,10 +1241,9 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="65"/>
    <tile gid="27"/>
-   <tile gid="0"/>
+   <tile gid="67"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1885,9 +1885,9 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="48"/>
    <tile gid="0"/>
-   <tile gid="50"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1917,9 +1917,9 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="65"/>
    <tile gid="0"/>
-   <tile gid="67"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1949,9 +1949,9 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="65"/>
    <tile gid="0"/>
-   <tile gid="67"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1981,9 +1981,9 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="65"/>
    <tile gid="0"/>
-   <tile gid="67"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -2013,9 +2013,9 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="65"/>
    <tile gid="0"/>
-   <tile gid="67"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -2327,13 +2327,13 @@
   </data>
  </layer>
  <objectgroup name="Collision">
-  <object id="17" x="175.333" y="158" width="81" height="82"/>
+  <object id="17" x="176" y="158" width="80.333" height="82"/>
   <object id="18" x="256" y="112" width="15" height="49.3333"/>
   <object id="20" x="173.667" y="76.3636" width="82.3333" height="35.9919"/>
   <object id="25" x="79.6667" y="0" width="82" height="112.289"/>
-  <object id="26" x="-0.333333" y="-0.101432" width="32.3292" height="127.821"/>
+  <object id="26" x="-0.333333" y="-0.101432" width="32.3292" height="120.101"/>
   <object id="27" x="0.000400916" y="143.738" width="31.9058" height="25.0301"/>
-  <object id="28" x="32.3333" y="158" width="128.333" height="84"/>
+  <object id="28" x="32.3333" y="158" width="127.667" height="84"/>
  </objectgroup>
  <objectgroup name="Spawn">
   <object id="12" x="61" y="125" width="5.66667" height="5.66667"/>
@@ -2342,7 +2342,7 @@
   <object id="30" x="33.75" y="-3.75" width="45.25" height="5.75"/>
   <object id="43" x="-3.09091" y="124.909" width="4.90909" height="21.4545"/>
   <object id="44" x="158.25" y="240.75" width="22.25" height="8.5"/>
-  <object id="45" x="156.5" y="93" width="24" height="7.25"/>
   <object id="47" x="242" y="115.25" width="12" height="9.25"/>
+  <object id="48" x="152.957" y="88.6957" width="31.3478" height="8.3913"/>
  </objectgroup>
 </map>

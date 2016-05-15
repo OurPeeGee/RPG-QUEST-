@@ -48,6 +48,7 @@ public class GamStWorld extends GamSt implements interState {
 	private HashMap<String,String> exitPaths;// = TextureLoader.getExitPaths(name);
 	private boolean exited = false;
 	private int ExitNum;
+	private double scale = TestDriver.getScale();
 	//private Rectangle playerRectangle;
 	//private int count = 0;
 	
@@ -87,7 +88,12 @@ public class GamStWorld extends GamSt implements interState {
 		g.drawImage(baseLayer, 0, 0, window);
 		//count++;
 		//System.out.println(count);
-		g.fillRect((int)TestDriver.getPlayer().getPlayer().getX(), (int)TestDriver.getPlayer().getPlayer().getY(), (int)TestDriver.getPlayer().getPlayer().getWidth(),(int) TestDriver.getPlayer().getPlayer().getHeight());
+		/*g.fillRect((int)TestDriver.getPlayer().getPlayer().getX(), 
+				(int)TestDriver.getPlayer().getPlayer().getY(), 
+				(int)TestDriver.getPlayer().getPlayer().getWidth(),
+				(int) TestDriver.getPlayer().getPlayer().getHeight());
+		*/
+		g.drawImage(TestDriver.getPlayer().getCurrentSprite(), (int)TestDriver.getPlayer().getPlayer().getX()-(int)(3*scale), (int)TestDriver.getPlayer().getPlayer().getY()-(int)(2*scale), window);
 		//g.fillRect((int)playerRectangle.getX(), (int)playerRectangle.getY(), (int)playerRectangle.getWidth(), (int)playerRectangle.getHeight());
 		
 		//TODO draw entities 
@@ -159,26 +165,59 @@ public class GamStWorld extends GamSt implements interState {
 		//if(inputs!=null&&inputs.isAnyKeyDown()){
 			//System.out.println("SOME KEY IS DOWN");
 			if(inputs.isKeyDown(KeyEvent.VK_W)) {
-				player.setRectangle(0, -0.5);
+				if(inputs.isKeyDown(KeyEvent.VK_A)){
+					player.setRectangle(-0.35, -0.35);
+				}
+				else if(inputs.isKeyDown(KeyEvent.VK_D)) {
+					player.setRectangle(0.35, -0.35);
+				}
+				else{
+					player.setRectangle(0, -0.5);
+				}
+				
 				//++count;
 				//System.out.println("Spacebar is down");
 			}
-			if(inputs.isKeyDown(KeyEvent.VK_A)) {
+			else if(inputs.isKeyDown(KeyEvent.VK_S)) {
+				if(inputs.isKeyDown(KeyEvent.VK_A)){
+					player.setRectangle(-0.35, 0.35);
+				}
+				else if(inputs.isKeyDown(KeyEvent.VK_D)) {
+					player.setRectangle(0.35, 0.35);
+				}
+				else{
+					player.setRectangle(0, 0.5);
+				}
+				
+				//++count;
+				//System.out.println("Spacebar is down");
+			}
+			else if(inputs.isKeyDown(KeyEvent.VK_A)) {
 				player.setRectangle(-0.5 , 0);
 				//++count;
 				//System.out.println("Spacebar is down");
 			}
-			if(inputs.isKeyDown(KeyEvent.VK_D)) {
+			else if(inputs.isKeyDown(KeyEvent.VK_D)) {
 				player.setRectangle(0.5, 0);
 				//++count;
 				//System.out.println("Spacebar is down");
 			}
+			else{
+				player.setRectangle(0, 0);
+			}
+			/*
 			if(inputs.isKeyDown(KeyEvent.VK_S)) {
+				if(inputs.isKeyDown(KeyEvent.VK_A)){
+					player.setRectangle(-0.25, 0.25);
+				}
+				else{
+					player.setRectangle(0, 0.5);
+				}
 				
-				player.setRectangle(0, 0.5);
 				//++count;
 				//System.out.println("Spacebar is down");
 			}
+			*/
 			//playerRectangle.setBounds((int)TestDriver.getPlayer().getPlayer().getX(), (int)TestDriver.getPlayer().getPlayer().getY(), (int)TestDriver.getPlayer().getPlayer().getWidth(),(int) TestDriver.getPlayer().getPlayer().getHeight());
 			
 			
