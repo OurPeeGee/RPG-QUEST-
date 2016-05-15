@@ -14,6 +14,7 @@ public class stateEngine {
 	//private static HashMap<String, String> toLevel = new HashMap<String, String>();
 	private static String toLevel;
 	private static interState GamstCurrent = toGamSt.get("Menu"); 
+	private static String PreviousGameStateName = "Default";
 	
 	public static void Update(Component window){//update cycle 
 		GamstCurrent.Update(window); 
@@ -30,10 +31,15 @@ public class stateEngine {
 	}
 	
 	public static void change(String name, String level){//changes active gamestate  
+		PreviousGameStateName = ((GamStWorld) GamstCurrent).getPreviousName();
 		GamstCurrent.gsExit();
 		toLevel = level;
 		GamstCurrent = toGamSt.get(name);
 		GamstCurrent.gsEnter();
+	}
+	
+	public static String getPrevious(){
+		return PreviousGameStateName;
 	}
 	
 	public static void Add(String name, interState user) {//adds new gamestate if it fits the interStates peramiters 

@@ -26,7 +26,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 	private static double scale;
 	//private static ArrayList<Rectangle> CollisionTiles = new ArrayList<>();
 	private static HashMap<String, ArrayList<Rectangle>> CollisionMap = new HashMap<String, ArrayList<Rectangle>>();
-	private static HashMap<String, ArrayList<Rectangle>> SpawnMap = new HashMap<String, ArrayList<Rectangle>>();
+	private static HashMap<String, HashMap<String, Rectangle>> SpawnMap = new HashMap<String, HashMap<String, Rectangle>>();
 	private static HashMap<String, ArrayList<Rectangle>> ExitMap = new HashMap<String, ArrayList<Rectangle>>();
 	private static HashMap<String, HashMap<String, String>> ExitPathMap = new HashMap<String, HashMap<String, String>>();
 	public static void loadList(double SCALE){
@@ -430,17 +430,35 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 					break;
 				case"Spawn":
 					NodeList SpawnsList = eObjectList.getElementsByTagName("object");
-					ArrayList<Rectangle> SpawnRectList = new ArrayList<Rectangle>();
+					HashMap<String,Rectangle> SpawnRectList = new HashMap<String,Rectangle>();
 					for(int a = 0; a<SpawnsList.getLength(); a++){
+						
+						String SpawnKey = "";
 						Node object = SpawnsList.item(a);
 						Element eObject = (Element) object;
+						NodeList properties = eObject.getElementsByTagName("properties");
+						System.out.println("SpawnPropertyLength: " + properties.getLength());
+						for(int q = 0; q<properties.getLength();q++){
+							Element eSProp = (Element) properties.item(q);
+							NodeList pSList = eSProp.getElementsByTagName("property");
+							for(int w = 0; w<pSList.getLength(); w++){
+								Node SProperty = pSList.item(w);
+								Element eSProperty = (Element) SProperty;
+								SpawnKey = eSProperty.getAttribute("value");
+								System.out.println("SpawnKey: " + SpawnKey);
+							}
+							//Node SProperty = properties.item(q);
+							//Element eSProperty = (Element) SProperty;
+							//SpawnKey = eSProperty.getAttribute("value");
+							//System.out.println("SpawnKey: " + SpawnKey);
+						}
 						Rectangle r = new Rectangle();
 						r.setBounds((int)Math.ceil(Double.parseDouble(eObject.getAttribute("x"))*scale), 
 							(int)(Math.ceil(Double.parseDouble(eObject.getAttribute("y"))*scale)), 
 							(int)(Math.ceil(Double.parseDouble(eObject.getAttribute("width"))*scale)), 
 							(int)(Math.ceil(Double.parseDouble(eObject.getAttribute("height"))*scale)));
 										//(int)Math.ceil(16*scale));//(int)Math.ceil(Double.parseDouble(eObject.getAttribute("height"))));
-						SpawnRectList.add(r);
+						SpawnRectList.put(SpawnKey, r);
 						
 					}System.out.println("SpawnRectangles");
 					SpawnMap.put(LName, SpawnRectList);
@@ -544,7 +562,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 		return CollisionMap.get(Name);
 	}
 	
-	public static ArrayList<Rectangle> getSpawns(String Name){
+	public static HashMap<String, Rectangle> getSpawns(String Name){
 		return SpawnMap.get(Name);
 	}
 	

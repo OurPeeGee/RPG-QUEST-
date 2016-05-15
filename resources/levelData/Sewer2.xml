@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="16" tileheight="16" nextobjectid="11">
+   <properties>
+  <property name="Exit0" value="SewerLevel1"/>
+ </properties>
  <tileset firstgid="1" name="CompleteSpriteSheet" tilewidth="16" tileheight="16" tilecount="1176" columns="42">
   <image source="resources/tilemaps/CompleteSpriteSheet.png" width="672" height="448"/>
  </tileset>
- <layer name="TileLayer1" width="32" height="24">
+  <layer name="TileLayer1" width="32" height="24">
   <data>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -64,10 +67,10 @@
    <tile gid="45"/>
    <tile gid="302"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="792"/>
+   <tile gid="792"/>
+   <tile gid="792"/>
+   <tile gid="792"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -96,8 +99,8 @@
    <tile gid="45"/>
    <tile gid="302"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="792"/>
+   <tile gid="792"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -194,8 +197,8 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="162"/>
+   <tile gid="162"/>
    <tile gid="0"/>
    <tile gid="129"/>
    <tile gid="129"/>
@@ -225,8 +228,8 @@
    <tile gid="302"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="162"/>
+   <tile gid="162"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="44"/>
@@ -356,7 +359,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="125"/>
    <tile gid="44"/>
    <tile gid="44"/>
    <tile gid="44"/>
@@ -388,7 +391,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="125"/>
    <tile gid="44"/>
    <tile gid="44"/>
    <tile gid="44"/>
@@ -420,7 +423,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="125"/>
    <tile gid="44"/>
    <tile gid="44"/>
    <tile gid="44"/>
@@ -452,7 +455,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="125"/>
    <tile gid="44"/>
    <tile gid="44"/>
    <tile gid="44"/>
@@ -481,10 +484,10 @@
    <tile gid="302"/>
    <tile gid="925"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="80"/>
+   <tile gid="81"/>
+   <tile gid="82"/>
+   <tile gid="83"/>
    <tile gid="44"/>
    <tile gid="44"/>
    <tile gid="44"/>
@@ -513,10 +516,10 @@
    <tile gid="302"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="122"/>
+   <tile gid="123"/>
+   <tile gid="124"/>
+   <tile gid="125"/>
    <tile gid="44"/>
    <tile gid="44"/>
    <tile gid="44"/>
@@ -673,10 +676,10 @@
    <tile gid="302"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="332"/>
+   <tile gid="333"/>
+   <tile gid="334"/>
+   <tile gid="335"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="129"/>
@@ -705,10 +708,10 @@
    <tile gid="302"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="374"/>
+   <tile gid="375"/>
+   <tile gid="376"/>
+   <tile gid="377"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="253"/>
@@ -737,10 +740,10 @@
    <tile gid="302"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="416"/>
+   <tile gid="417"/>
+   <tile gid="418"/>
+   <tile gid="419"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="295"/>
@@ -769,10 +772,10 @@
    <tile gid="263"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="458"/>
+   <tile gid="459"/>
+   <tile gid="460"/>
+   <tile gid="461"/>
   </data>
  </layer>
  <layer name="TileLayer2" width="32" height="24">
@@ -2321,7 +2324,7 @@
  </layer>
  <objectgroup name="Collision">
   <object id="1" x="153.5" y="71" width="57.5" height="31.5"/>
-  <object id="4" x="401" y="1" width="110" height="127"/>
+  <object id="4" x="401" y="1" width="110" height="119"/>
   <object id="5" x="400" y="144.5" width="111" height="238.5"/>
   <object id="6" x="0.5" y="334.5" width="402.5" height="53"/>
   <object id="7" x="-4" y="100" width="5.5" height="249.5"/>
@@ -2329,9 +2332,13 @@
   <object id="10" x="358" y="-6" width="52.5" height="10"/>
  </objectgroup>
  <objectgroup name="Spawn">
-  <object id="2" x="252.5" y="190.5" width="25.5" height="17"/>
+  <object id="16" x="499" y="125.5" width="7" height="8.5">
+   <properties>
+    <property name="SpawnKey" value="SewerLevel1"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="LevelExit" visible="0">
-  <object id="3" x="476" y="15.5" width="12" height="13"/>
+ <objectgroup name="LevelExit">
+  <object id="12" x="513" y="124.5" width="8" height="22.5"/>
  </objectgroup>
 </map>

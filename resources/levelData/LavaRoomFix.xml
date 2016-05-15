@@ -2328,7 +2328,11 @@
   <object id="9" x="510" y="124.5" width="16.5" height="69"/>
  </objectgroup>
  <objectgroup name="Spawn">
-  <object id="6" x="2" y="152" width="12" height="12.5"/>
+  <object id="6" x="2" y="152" width="12" height="12.5">
+   <properties>
+    <property name="SpawnKey" value="SewerLevel1"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="LevelExit">
   <object id="7" x="-17.5" y="118" width="14.5" height="82.5"/>

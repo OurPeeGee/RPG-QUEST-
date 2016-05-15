@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 public class TestDriver extends JPanel{
 	
 	//static JFrame window = new JFrame(); 
-	private static double scale = 3;
+	private static double scale = 2;
 	//stateEngine cQuest = new stateEngine(); 
 	private int frameRate=144;//the framerate of the game //Marcus: Somehow the physics of the game is tied to framerate.  I don't know if it is my code or the way this driver works that is causing it.
 	int count = 0;//I did some test and it turns out that the gameUpdate is bound by the framerate value and the Render function is NOT.  This means that frameRate actually sets the rate of the game physics.

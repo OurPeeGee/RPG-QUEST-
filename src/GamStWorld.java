@@ -43,7 +43,7 @@ public class GamStWorld extends GamSt implements interState {
 	int D_KEY = KeyEvent.VK_D;
 	private PlayerTestEntity player;// = TestDriver.getPlayer();
 	private ArrayList<Rectangle> LevelCollisions;// = TextureLoader.getCollisions(name);
-	private ArrayList<Rectangle> Spawns;// = TextureLoader.getSpawns(name);//This list contains the spawns for the character.  multiple entrances to rooms possible
+	private HashMap<String, Rectangle> Spawns;// = TextureLoader.getSpawns(name);//This list contains the spawns for the character.  multiple entrances to rooms possible
 	private ArrayList<Rectangle> Exits;// = TextureLoader.getExitRects(name);
 	private HashMap<String,String> exitPaths;// = TextureLoader.getExitPaths(name);
 	private boolean exited = false;
@@ -127,12 +127,12 @@ public class GamStWorld extends GamSt implements interState {
 		Spawns = TextureLoader.getSpawns(name);
 		Exits = TextureLoader.getExitRects(name);
 		exitPaths = TextureLoader.getExitPaths(name);
-		
+		//tring previous = 
 		baseLayer = layers.get(0);
 		//transLayer = layers.get(1);
 		topLayer = layers.get(1);
-		
-		player.SPAWN((int)Spawns.get(0).getX(),(int)Spawns.get(0).getY());
+		String SpawnKey = stateEngine.getPrevious();
+		player.SPAWN((int)Spawns.get(SpawnKey).getX(),(int)Spawns.get(SpawnKey).getY());
 		player.UpdateCollision(LevelCollisions);
 		System.out.println("world enter");
 	}
@@ -144,6 +144,9 @@ public class GamStWorld extends GamSt implements interState {
 		return Integer.toString(ExitNum);
 	}
 
+	public String getPreviousName(){
+		return name;
+	}
 	
 	public void Update(Component window) {//TODO replace the speed values with actual values from the player, so that the values are defined by the player class
 		// TODO Auto-generated method stub

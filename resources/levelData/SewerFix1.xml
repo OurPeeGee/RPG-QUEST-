@@ -2336,7 +2336,21 @@
   <object id="28" x="32.3333" y="158" width="127.667" height="84"/>
  </objectgroup>
  <objectgroup name="Spawn">
-  <object id="12" x="61" y="125" width="5.66667" height="5.66667"/>
+  <object id="12" x="61" y="125" width="5.66667" height="5.66667">
+   <properties>
+    <property name="SpawnKey" value="Default"/>
+   </properties>
+  </object>
+  <object id="49" x="5.25" y="126.75" width="8.125" height="7.75">
+   <properties>
+    <property name="SpawnKey" value="SewerLevel2"/>
+   </properties>
+  </object>
+  <object id="50" x="52.5" y="7.5" width="7.5" height="6.5">
+   <properties>
+    <property name="SpawnKey" value="LavaRoomLevel1"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="LevelExit">
   <object id="30" x="33.75" y="-3.75" width="45.25" height="5.75"/>
