@@ -69,13 +69,16 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 		
 		//List<BufferedImage> tileImages = new ArrayList<BufferedImage>();
 		int firstGid;
-		String Name;
+		String Name = "";
 		int mapWidth;
 		int mapHeight;
 		int tileWidth;
 		int tileHeight;
 		int imageWidth;
 		int imageHeight;
+		int tileCount;
+		int columns;
+		int rows;
 		//double scale=SCALE;
 		String ImagePath;
 		//String filePathName = filePath;//"resources\\tilemaps\\series1\\testsewer\\SewerTest1.xml";//TODO TEMPORARY FOR TESTING
@@ -145,19 +148,28 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 					imageWidth = (int) (Integer.parseInt(eImage.getAttribute("width")));
 					imageHeight = (int) (Integer.parseInt(eImage.getAttribute("height")));
 					ImagePath = eImage.getAttribute("source");
+					tileCount = (int) (Integer.parseInt(eElement.getAttribute("tilecount")));
+					columns = (int) (Integer.parseInt(eElement.getAttribute("columns")));
+					rows = (int) (tileCount/columns);
 					//ImagePath = eElement.getFirstChild()
 					TileSet tileSetLoad = new TileSet(firstGid, Name, tileWidth, tileHeight, ImagePath, imageHeight, imageWidth);
-					Tiles.add(new TileSet(firstGid, Name, tileWidth, tileHeight, ImagePath, imageHeight, imageWidth));
+					if(!tiles.containsKey(Name)){
+						Tiles.add(new TileSet(firstGid, Name, tileWidth, tileHeight, ImagePath, imageHeight, imageWidth));
+					}
+					
 					
 					//BufferedImage tiled = ImageIO.read(new File(ImagePath));
 					BufferedImage[] tileset = new BufferedImage[tileSetLoad.getTileAmountWidth()*Math.floorDiv(imageHeight,tileHeight)];
 					BufferedImage tileBase = ImageIO.read(new File(ImagePath));//This contains the tileSet image and is accessed through the key which is it's name.
-					for(int a = 0; a< Math.floorDiv(imageHeight,tileHeight); a++){
-						for(int q = 0; q<tileSetLoad.getTileAmountWidth()-1; q++){//This somehow prevents the method from ever reaching the last part of the tilemap.
+					//for(int a = 0; a< Math.floorDiv(imageHeight,tileHeight); a++){
+					for(int a = 0; a< rows; a++){
+						//for(int q = 0; q<tileSetLoad.getTileAmountWidth()-1; q++){//This somehow prevents the method from ever reaching the last part of the tilemap.
+						for(int q = 0; q<columns-1; q++){
 							//TODO this adds all of the tiles into the array, but they are all accessed in a way that 
 							//leaves the first index empty to serve as the transparent tile, and then the last tile may or may not actually get put into the array, 
 							//This needs to be tested to make sure we don't run into errors or limitations while building the game
-							tileset[q+a*tileSetLoad.getTileAmountWidth()+1] = tileBase.getSubimage(q*tileWidth, a*tileHeight, tileWidth, tileHeight);
+							//tileset[q+a*tileSetLoad.getTileAmountWidth()+1] = tileBase.getSubimage(q*tileWidth, a*tileHeight, tileWidth, tileHeight);
+							tileset[q+a*columns+1] = tileBase.getSubimage(q*tileWidth, a*tileHeight, tileWidth, tileHeight);
 							//tileset[q+a*tileSetLoad.getTileAmountWidth()] = tileBase.getSubimage(1,1,1,1);
 							
 						}
@@ -279,21 +291,26 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			//screenBitmap.
 			//Graphics2D g = screenBitmap.createGraphics();
 			//This loop might need fixing, since I think it loads everything to screenbitmap too early
+			System.out.println(Tiles.size());
 			for(int spriteForY = 0; spriteForY < mapHeight; spriteForY++){
 				for(int spriteForX = 0; spriteForX < mapWidth; spriteForX++){
 					int tileGid = (int) tileCoordinates[spriteForY][spriteForX];
 					TileSet currentTileSet = null;
 					// only use tiles from this tileset (we get the source image from here)
 					for(TileSet tileSet1: Tiles){
-					//	System.out.println(tileSet1.getName());
-						//System.out.println(tileSet1.getName());//TODO remove this for loop
-						if(tileGid >= tileSet1.getFirstGid()-1 && tileGid <= tileSet1.getLastGid()){
-							//We found the right tileset for this gid
-							
+						if(tileSet1.getName().equals(Name)){
 							currentTileSet = tileSet1;
-							
 							break;
 						}
+					//	System.out.println(tileSet1.getName());
+						//System.out.println(tileSet1.getName());//TODO remove this for loop
+						//if(tileGid >= tileSet1.getFirstGid()-1 && tileGid < tileSet1.getLastGid()){
+							//We found the right tileset for this gid
+							
+							//currentTileSet = tileSet1;
+							
+							//break;
+						//}
 					}
 					
 					//System.out.println(currentTileSet.getName());

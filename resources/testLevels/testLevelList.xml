@@ -2,4 +2,5 @@
 <levelList>
 	<level name="SewerLevel1" dataPath="resources/levelData/SewerFix1.xml"/>
 	<level name="LavaRoomLevel1" dataPath="resources/levelData/LavaRoomFix.xml"/>
+	<level name="SewerLevel2" dataPath="resources/levelData/Sewer2.xml"/>
 </levelList>

@@ -2,12 +2,12 @@
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="16" tileheight="16" nextobjectid="49">
  <properties>
   <property name="Exit0" value="LavaRoomLevel1"/>
-  <property name="Exit1" value="LavaRoomLevel1"/>
+  <property name="Exit1" value="SewerLevel2"/>
   <property name="Exit2" value="LavaRoomLevel1"/>
   <property name="Exit3" value="LavaRoomLevel1"/>
   <property name="Exit4" value="LavaRoomLevel1"/>
  </properties>
- <tileset firstgid="1" name="SewersExtra" tilewidth="16" tileheight="16" tilecount="374" columns="17">
+ <tileset firstgid="1" name="SHEET_ONE" tilewidth="16" tileheight="16" tilecount="374" columns="17">
   <image source="resources/tilemaps/series1/sewer_1.png" width="272" height="352"/>
  </tileset>
  <layer name="TileLayer1" width="32" height="24">
