@@ -5,12 +5,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.awt.Component;
 import java.awt.Graphics;
 import javax.imageio.ImageIO;
 
 public class PlayerTestEntity {
 	
 	private Rectangle sprite;
+	private Component window;
 	private ArrayList<Rectangle> Collision;
 	private double scale = TestDriver.getScale();
 	private HashMap<String, ArrayList<BufferedImage>> sprites = new HashMap<String, ArrayList<BufferedImage>>();
@@ -26,12 +28,23 @@ public class PlayerTestEntity {
 	int count = 0;
 	int num = 0;
 	int AnimationSpeed = 30;
-	public PlayerTestEntity(){
-		try {
-			spriteSheet = ImageIO.read(new File("MiniKnight.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	
+	public void Render(Graphics g){
+		
+		
+		g.drawImage(currentSprite, (int)sprite.getX()-(int)(3*scale), (int)sprite.getY()-(int)(2*scale), window);
+		
+	}
+	
+	
+	
+	
+	
+	
+	public PlayerTestEntity(Component Gwindow){
+		window = Gwindow;
+		
+		spriteSheet = TextureLoader.getSpriteSheet();
 		scaledSpriteSheet = new BufferedImage((int)Math.floor(spriteSheet.getWidth()*scale), (int)Math.floor(spriteSheet.getHeight()*scale), BufferedImage.TYPE_INT_ARGB);
 		Graphics s = scaledSpriteSheet.createGraphics();
 		s.drawImage(spriteSheet, 0, 0, (int)Math.floor(spriteSheet.getWidth()*scale), (int)Math.floor(spriteSheet.getHeight()*scale), null);

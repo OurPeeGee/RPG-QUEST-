@@ -3,6 +3,7 @@
 // 5/8/2106
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -22,7 +23,8 @@ public class TestDriver extends JPanel{
 	private BufferedImage GamePicture;
 	private Graphics g;
 	private InputManager input;
-	private static PlayerTestEntity player = new PlayerTestEntity();
+	private static PlayerTestEntity player;
+	private static Overlay overlay;
 
 	public static PlayerTestEntity getPlayer(){
 		return player;
@@ -37,7 +39,10 @@ public class TestDriver extends JPanel{
         Graphics2D g2d = GamePicture.createGraphics();
         //g2d.setTransform(AffineTransform.getScaleInstance(-1, 1));
         g2d.drawImage(GamePicture, 0, 0, this);
+        
         g2d.dispose();
+        
+        input = new InputManager();
 		
         
         
@@ -45,10 +50,11 @@ public class TestDriver extends JPanel{
 		
 	}
 	
+	//This starts the Game Engine
 	public void start() {
-		input = new InputManager();
+		
 		Component COMPONENT = new TestDriver();
-		JFrame frame = new JFrame("Game Window");
+		JFrame frame = new JFrame("SpriteSouls");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.add(COMPONENT);
@@ -57,11 +63,14 @@ public class TestDriver extends JPanel{
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         window = frame;
-        this.addKeyListener(input);
+        //this.addKeyListener(input);
         window.addKeyListener(input);
-        COMPONENT.addKeyListener(input);
+        
+        //COMPONENT.addKeyListener(input);
         this.setDoubleBuffered(true);
-        stateEngine.Add("Menu", new GamStMenu());
+        player = new PlayerTestEntity(window);
+        stateEngine.setOverlay(new Overlay(window));
+        stateEngine.Add("Menu", new GamStMenu(window));
         stateEngine.Add("World", new GamStWorld(window));
       //  this.addComponentListener(new ComponentAdapter(){
         	//public void componentShown(Component window) {

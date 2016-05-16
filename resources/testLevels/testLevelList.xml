@@ -3,4 +3,6 @@
 	<level name="SewerLevel1" dataPath="resources/levelData/SewerFix1.xml"/>
 	<level name="LavaRoomLevel1" dataPath="resources/levelData/LavaRoomFix.xml"/>
 	<level name="SewerLevel2" dataPath="resources/levelData/Sewer2.xml"/>
+	<level name="PAUSE_MENU" dataPath="resources/levelData/Menu.xml"/>
+	<level name="Overlay" dataPath="resources/levelData/Overlay.xml"/>
 </levelList>

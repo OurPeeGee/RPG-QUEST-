@@ -17,19 +17,45 @@ import java.awt.image.Raster;
 //TODO currently only supports one tileMap
 public class TextureLoader {//Load will need to return a hashmap of the filename as the key, and a bitmap image for that level to display
 	
-	private static HashMap<String, BufferedImage[]> tiles = new HashMap<String, BufferedImage[]>();
-	private static HashMap<String, ArrayList<BufferedImage>> levelMaps = new HashMap<String, ArrayList<BufferedImage>>();
-	private static ArrayList<String> LevelNameList = new ArrayList<String>();//This needs to be a hashmap.
-	private static List<TileSet> Tiles = new ArrayList<TileSet>();
-	private static int MapHeight;
-	private static int MapWidth;
+	private static BufferedImage spriteSheet;
+	private static HashMap<String, BufferedImage[]> tiles = new HashMap<String, BufferedImage[]>();//This is the map of the tiles for the image constructor
+	private static HashMap<String, ArrayList<BufferedImage>> levelMaps = new HashMap<String, ArrayList<BufferedImage>>(); //This is the map for the constructed images, which are stored in layers
+	private static ArrayList<String> LevelNameList = new ArrayList<String>();//This needs to be a hashmap.  //This is only used once, at the start of the first GameStateWorld.  It is never used again after that
+	private static List<TileSet> Tiles = new ArrayList<TileSet>();  //This holds the data for each tileset
+	private static int MapHeight;//Height of the level in tiles
+	private static int MapWidth;//Width of the level in tiles
 	private static double scale;
 	//private static ArrayList<Rectangle> CollisionTiles = new ArrayList<>();
-	private static HashMap<String, ArrayList<Rectangle>> CollisionMap = new HashMap<String, ArrayList<Rectangle>>();
-	private static HashMap<String, HashMap<String, Rectangle>> SpawnMap = new HashMap<String, HashMap<String, Rectangle>>();
-	private static HashMap<String, ArrayList<Rectangle>> ExitMap = new HashMap<String, ArrayList<Rectangle>>();
-	private static HashMap<String, HashMap<String, String>> ExitPathMap = new HashMap<String, HashMap<String, String>>();
+	private static HashMap<String, ArrayList<Rectangle>> CollisionMap = new HashMap<String, ArrayList<Rectangle>>();//Contains the List of collision rectangles for the level with the name key
+	private static HashMap<String, HashMap<String, Rectangle>> SpawnMap = new HashMap<String, HashMap<String, Rectangle>>();//Contains the HashMap of the Spawn rectangles for the map with the name. 
+	//The key to the nested hashmap is the name of the level the player just left.
+	private static HashMap<String, ArrayList<Rectangle>> ExitMap = new HashMap<String, ArrayList<Rectangle>>();//This stores the list of exits a level has. The key is the value of the exit# property in the xml files
+	private static HashMap<String, HashMap<String, String>> ExitPathMap = new HashMap<String, HashMap<String, String>>();//This stores the ExitMap map.  The key is the mapName
+	private static BufferedImage menuPause; //This is the image for the pause menu, which is currently the inventory screen.  This may be changed in the future TODO
+	private static HashMap<String, HashMap<String, Rectangle>> PlayerStats = new HashMap<String, HashMap<String, Rectangle>>();//This is the map of the player stat display rectangles for that particular level (Menus are levels)
+	//This will be used for menu interaction.  The key for the nested HashMap is the StatType, and the key for the outer hashmap is the level name (Menu name)
+	
+	public static BufferedImage getMenuPause(){
+		return menuPause;
+	}
+	
+	public static BufferedImage getSpriteSheet(){
+		return spriteSheet;
+	}
+	
 	public static void loadList(double SCALE){
+		
+		try {
+			spriteSheet = ImageIO.read(new File("MiniKnight.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			menuPause = ImageIO.read(new File("Menu.PNG"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		scale = SCALE;
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try{
@@ -479,6 +505,41 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 						
 					}System.out.println("LevelExitRectangles");
 					ExitMap.put(LName, ExitRectList);
+					break;
+				case"PlayerStats":
+					NodeList StatList = eObjectList.getElementsByTagName("object");
+					HashMap<String,Rectangle> StatRectMap = new HashMap<String,Rectangle>();
+					for(int a = 0; a<StatList.getLength(); a++){
+						
+						String StatType = "";
+						Node object = StatList.item(a);
+						Element eObject = (Element) object;
+						NodeList properties = eObject.getElementsByTagName("properties");
+						System.out.println("PlayerStatLength: " + properties.getLength());
+						for(int q = 0; q<properties.getLength();q++){
+							Element eSProp = (Element) properties.item(q);
+							NodeList pSList = eSProp.getElementsByTagName("property");
+							for(int w = 0; w<pSList.getLength(); w++){
+								Node SProperty = pSList.item(w);
+								Element eSProperty = (Element) SProperty;
+								StatType = eSProperty.getAttribute("value");
+								System.out.println("StatType: " + StatType);
+							}
+							//Node SProperty = properties.item(q);
+							//Element eSProperty = (Element) SProperty;
+							//SpawnKey = eSProperty.getAttribute("value");
+							//System.out.println("SpawnKey: " + SpawnKey);
+						}
+						Rectangle r = new Rectangle();
+						r.setBounds((int)Math.ceil(Double.parseDouble(eObject.getAttribute("x"))*scale), 
+							(int)(Math.ceil(Double.parseDouble(eObject.getAttribute("y"))*scale)), 
+							(int)(Math.ceil(Double.parseDouble(eObject.getAttribute("width"))*scale)), 
+							(int)(Math.ceil(Double.parseDouble(eObject.getAttribute("height"))*scale)));
+										//(int)Math.ceil(16*scale));//(int)Math.ceil(Double.parseDouble(eObject.getAttribute("height"))));
+						StatRectMap.put(StatType, r);
+						
+					}System.out.println("PlayerStats");
+					PlayerStats.put(LName, StatRectMap);
 					break;
 				default: System.out.println("UNRECOGNIZED OBJECT TYPE");			
 				}

@@ -20,4 +20,7 @@ public class GamSt implements interState {
 		// TODO Auto-generated method stub
 		
 	}
+	public String getPreviousName(){
+		return"";
+	}
 }

@@ -16,7 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class GameWindow extends JPanel{
-	
+	/*
 	private Component window;
 	private GamStWorld state;
 	
@@ -46,7 +46,7 @@ public class GameWindow extends JPanel{
 	
 	public static void GWindowMain(){
 		
-		JFrame frame = new JFrame("The Aquarium ");
+		JFrame frame = new JFrame("SpriteSouls");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.add(new GameWindow());
@@ -82,6 +82,6 @@ public class GameWindow extends JPanel{
 
 	    }
 	
-	
+	*/
 	
 }

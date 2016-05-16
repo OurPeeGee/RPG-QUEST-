@@ -12,6 +12,7 @@ public class Game {
 		
 		//TextureLoader.loadList();
 		
+		//TODO Set up level animations using properties.  The properties will be defined by the tile to be animated.  The value of the property will be the filePath to the animation spriteSheet
 		TestDriver game = new TestDriver();
 		game.start();
 		

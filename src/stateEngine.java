@@ -15,6 +15,7 @@ public class stateEngine {
 	private static String toLevel;
 	private static interState GamstCurrent = toGamSt.get("Menu"); 
 	private static String PreviousGameStateName = "Default";
+	private static Overlay overlay;
 	
 	public static void Update(Component window){//update cycle 
 		GamstCurrent.Update(window); 
@@ -30,8 +31,17 @@ public class stateEngine {
 		GamstCurrent.gsEnter();
 	}
 	
+	public static void setOverlay(Overlay over){
+		overlay = over;
+	}
+	
+	public static Overlay getOverlay(){
+		return overlay;
+	}
+	
 	public static void change(String name, String level){//changes active gamestate  
-		PreviousGameStateName = ((GamStWorld) GamstCurrent).getPreviousName();
+		
+		PreviousGameStateName = (GamstCurrent).getPreviousName();
 		GamstCurrent.gsExit();
 		toLevel = level;
 		GamstCurrent = toGamSt.get(name);
