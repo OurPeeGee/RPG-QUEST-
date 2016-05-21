@@ -56,7 +56,7 @@ public class GamStWorld extends GamSt implements interState {
 	//private BufferedImage OverlayBase;
 	//private BufferedImage Overlay;
 	//private Rectangle playerRectangle;
-	//private int count = 0;
+	private int count = 0;
 	
 	
 	public GamStWorld(Component Gwindow){
@@ -103,6 +103,9 @@ public class GamStWorld extends GamSt implements interState {
 		//System.out.println("world render");
 		
 		
+		
+		
+		
 		//count++;
 		//System.out.println(count);
 		/*g.fillRect((int)TestDriver.getPlayer().getPlayer().getX(), 
@@ -119,6 +122,7 @@ public class GamStWorld extends GamSt implements interState {
 		//TODO draw entities 
 		g.drawImage(topLayer, 0, 0, window);
 		stateEngine.getOverlay().Render(g);
+		
 		//g.drawImage(OverlayBase, 0, 0, window);
 		//g.drawImage(Overlay, 0, 0, window);
 		

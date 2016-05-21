@@ -17,7 +17,9 @@ public class TestDriver extends JPanel{
 	//static JFrame window = new JFrame(); 
 	private static double scale = 2;
 	//stateEngine cQuest = new stateEngine(); 
-	private int frameRate=144;//the framerate of the game //Marcus: Somehow the physics of the game is tied to framerate.  I don't know if it is my code or the way this driver works that is causing it.
+	private int TickRate = 144;
+	private int skipTicks = 1000/TickRate;
+	private int frameRate=24;//the framerate of the game //Marcus: Somehow the physics of the game is tied to framerate.  I don't know if it is my code or the way this driver works that is causing it.
 	int count = 0;//I did some test and it turns out that the gameUpdate is bound by the framerate value and the Render function is NOT.  This means that frameRate actually sets the rate of the game physics.
 	private Component window;
 	private BufferedImage GamePicture;
@@ -25,6 +27,7 @@ public class TestDriver extends JPanel{
 	private InputManager input;
 	private static PlayerTestEntity player;
 	private static Overlay overlay;
+	private int MAX_FRAMESKIP = 20;
 
 	public static PlayerTestEntity getPlayer(){
 		return player;
@@ -82,7 +85,7 @@ public class TestDriver extends JPanel{
 		// TODO Auto-generated method stub
 		
 		
-		//game state for everey game mode
+		//game state for every game mode
 		
 		
 		//cQuest.change("Menu");//changes the selected window to Menu
@@ -107,42 +110,127 @@ public class TestDriver extends JPanel{
 		long loopTime=0;//time for a single loop to be completed. must be consistantly below the frametime to achieve selected framerate
 		long frameTime=1000/frameRate;//milliseconds bettween frames 
 		int wait=0;
-		while(true)
-		{	
-			long loopStart=System.currentTimeMillis();
-			paintComponent(g);
-			//System.out.println("loops this cycle"+loopTime/frameTime+" time ");
-			for(int i=0;i<((int)loopTime/frameTime);i++);//call the game loop more frequently if the update time is longer than the target frame time
-			{
-				gameLoopUpdate(loopTime);
-				
-			}
-			if(loopTime>=frameTime)//prevents below zero thread stops 
-			{
-				wait=0;
-			}
-			else
-			{
-			 wait=(int) (frameTime-loopTime);
-			}
-			try {
-				Thread.sleep(wait);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		int frames_Skipped = 0;
+		int loops = 0;
+		long interpolation = 0;
+		long loopStart=System.currentTimeMillis();
+		long nextTick = loopStart;
+		Boolean running = true;
+		stateEngine.Update(window);
+		paintComponent(g);
+		
+		while(running){
+			loops = 0;
+			loopStart=System.currentTimeMillis();
+			//nextTick = System.currentTimeMillis();
+			frames_Skipped = 0;
+			//stateEngine.Update(window);
+			
+			while(loopStart>nextTick && loops < MAX_FRAMESKIP){
+				stateEngine.Update(window);
+				nextTick+=skipTicks;
+				loops++;
 			}
 			loopTime=System.currentTimeMillis()-loopStart;
+			wait = (int)(frameTime-loopTime);
+			if(wait>0){
+				try{
+					Thread.sleep(wait);
+					System.out.println("wait: " + wait);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			window.repaint();
+			//loopStart=System.currentTimeMillis();
+			//window.repaint();
+			//loopTime=System.currentTimeMillis()-loopStart;
+			//interpolation = (long)(System.currentTimeMillis()-loopStart + skipTicks - nextTick)/(long)(skipTicks);
+			//paintComponent(g);
+			//gameLoopUpdate(interpolation);
+			//window.repaint();
+			//while(System.currentTimeMillis()-loopStart>=frameTime){
+				//paintComponent(g);
+				
+			//}
+			//else{
+				//frames_Skipped++;
+		//	}
+			
+			//Render(interpolation, g);
+			
+		}
+		
+		/*
+		while(running)
+		{	
+			
+			loopStart=System.currentTimeMillis();
+			frames_Skipped = 0;
+			stateEngine.Update(window);
+			//paintComponent(g);
+			window.repaint();
+			loopTime=System.currentTimeMillis()-loopStart;
+			System.out.println("loops this cycle"+ loopTime +" time ");
+			wait = (int)(skipTicks-loopTime);
+			if(wait>0){
+				try {
+					Thread.sleep(wait);
+					System.out.println("wait: " + wait);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			while(wait < 0 && frames_Skipped < MAX_FRAMESKIP ){
+				stateEngine.Update(window);
+				wait += frameTime;
+				frames_Skipped++;
+				System.out.println("Frames skipped: " + frames_Skipped);
+			}
+			
+			//System.out.println("loops this cycle"+loopTime/frameTime+" time ");
+			//for(int i=0;i<((int)loopTime/frameTime);i++);//call the game loop more frequently if the update time is longer than the target frame time
+			//{
+			//	gameLoopUpdate(loopTime);
+				
+			//}
+			//if(loopTime>=frameTime)//prevents below zero thread stops 
+			//{
+			//	wait=0;
+			//}
+			//else
+			//{
+			// wait=(int) (frameTime-loopTime);
+			//}
+			
 			//System.out.println(1000/(loopTime+1));	
 		}
+		*/
 	}
+	/*
+	private void Render(float interp, Graphics g){
+		
+		for(float i=0;i<(interp);i++);//changes the game update rate based on hte frame rate. 
+		{
+			//paintComponent(g);
+			//stateEngine.Update(window);//calls update method of 	
+		}		 
+		
+		
+	}
+	*/
 	@Override
     protected void paintComponent(Graphics g) {
-
+		//WHY THE FUCK IS THIS CALLED EVEN WHEN IT IS NEVER CALLED IN THE LOOP42?????
         super.paintComponent(g);
         
         stateEngine.Render(g);
         
-        repaint();
+        //repaint();
 
         //for (Fish fish : fishes) {
         //    fish.drawFishImage(g);
