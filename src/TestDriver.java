@@ -1,4 +1,5 @@
 //Erik Olsen
+//Marcus Moad
 //Driver class to test the Game State framework functionallity gamestate methods. 
 // 5/8/2106
 
@@ -15,19 +16,19 @@ import javax.swing.JPanel;
 public class TestDriver extends JPanel{
 	
 	//static JFrame window = new JFrame(); 
-	private static double scale = 2;
+	private static double scale = 4;
 	//stateEngine cQuest = new stateEngine(); 
 	private int TickRate = 144;
 	private int skipTicks = 1000/TickRate;
-	private int frameRate=24;//the framerate of the game //Marcus: Somehow the physics of the game is tied to framerate.  I don't know if it is my code or the way this driver works that is causing it.
-	int count = 0;//I did some test and it turns out that the gameUpdate is bound by the framerate value and the Render function is NOT.  This means that frameRate actually sets the rate of the game physics.
+	private int frameRate=144;//the framerate of the game //Marcus: Somehow the physics of the game is tied to framerate.  I don't know if it is my code or the way this driver works that is causing it.
+	int cQuest = 0;//I did some test and it turns out that the gameUpdate is bound by the framerate value and the Render function is NOT.  This means that frameRate actually sets the rate of the game physics. TODO 
 	private Component window;
 	private BufferedImage GamePicture;
 	private Graphics g;
 	private InputManager input;
 	private static PlayerTestEntity player;
 	private static Overlay overlay;
-	private int MAX_FRAMESKIP = 20;
+	private int MAX_FRAMESKIP = 40;//wth does this do marcus -Erik TODO
 
 	public static PlayerTestEntity getPlayer(){
 		return player;
@@ -82,7 +83,6 @@ public class TestDriver extends JPanel{
       //  });
        
         
-		// TODO Auto-generated method stub
 		
 		
 		//game state for every game mode

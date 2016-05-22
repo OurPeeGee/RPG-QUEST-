@@ -4,34 +4,16 @@
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.awt.Component;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
-import java.awt.geom.Rectangle2D;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-
-import java.awt.Frame;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+
 
 public  class GamStMenu extends GamSt implements interState {
 			
 	private Component window;
-	private float movementX;
-	private float movementY=0;
+	
 	private BufferedImage menuImage = TextureLoader.getMenuPause();
 	private double scale = TestDriver.getScale();
 	//private BufferedImage lastScreen = stateEngine.getLastScreen();
@@ -39,13 +21,12 @@ public  class GamStMenu extends GamSt implements interState {
 
 
 	
-	private ArrayList<String> levels;// = TextureLoader.getLevelList();
+	
 	//private String name;// = levels.get(0);
 	private ArrayList<BufferedImage> layers;// = TextureLoader.getLevelMap(name);
 	//private Component window;
 	private BufferedImage baseLayer;
-	private BufferedImage transLayer;
-	private BufferedImage entityLayer;
+	
 	private BufferedImage topLayer;
 	//int W_KEY = KeyEvent.VK_W;
 	//int A_KEY = KeyEvent.VK_A;

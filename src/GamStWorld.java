@@ -37,6 +37,8 @@ public class GamStWorld extends GamSt implements interState {
 	private BufferedImage transLayer;
 	private BufferedImage entityLayer;
 	private BufferedImage topLayer;
+	
+	//input Def 
 	int W_KEY = KeyEvent.VK_W;
 	int A_KEY = KeyEvent.VK_A;
 	int S_KEY = KeyEvent.VK_S;
@@ -78,7 +80,6 @@ public class GamStWorld extends GamSt implements interState {
 		//try {
 		//	menuImage = ImageIO.read(new File("Menu.PNG"));
 		//} catch (IOException e) {
-			// TODO Auto-generated catch block
 		//	e.printStackTrace();
 	//	}
 		gsEnter();

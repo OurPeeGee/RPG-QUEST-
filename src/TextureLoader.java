@@ -1,4 +1,6 @@
-
+//Primary Marcus Moad 
+//Erik, Nick
+//Texture preloader 
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import java.io.*;
@@ -14,7 +16,7 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
 
-//TODO currently only supports one tileMap
+//TODO "currently"(most likely will)  only supports one tileMap
 public class TextureLoader {//Load will need to return a hashmap of the filename as the key, and a bitmap image for that level to display
 	
 	private static BufferedImage spriteSheet;
@@ -24,7 +26,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 	private static List<TileSet> Tiles = new ArrayList<TileSet>();  //This holds the data for each tileset
 	private static int MapHeight;//Height of the level in tiles
 	private static int MapWidth;//Width of the level in tiles
-	private static double scale;
+	private static double scale;//scaling of the window. 
 	//private static ArrayList<Rectangle> CollisionTiles = new ArrayList<>();
 	private static HashMap<String, ArrayList<Rectangle>> CollisionMap = new HashMap<String, ArrayList<Rectangle>>();//Contains the List of collision rectangles for the level with the name key
 	private static HashMap<String, HashMap<String, Rectangle>> SpawnMap = new HashMap<String, HashMap<String, Rectangle>>();//Contains the HashMap of the Spawn rectangles for the map with the name. 
