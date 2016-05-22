@@ -6,10 +6,8 @@ import java.io.FileInputStream;
 import javax.imageio.ImageIO;
 
 public class Game {
-
 	public static void main(String[] args) {
-		
-		
+	
 		//TextureLoader.loadList();
 		
 		//TODO Set up level animations using properties.  The properties will be defined by the tile to be animated.  The value of the property will be the filePath to the animation spriteSheet

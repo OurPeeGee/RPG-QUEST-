@@ -1,3 +1,5 @@
+//Marcus Moad 
+//Needs Comments TODO 
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;

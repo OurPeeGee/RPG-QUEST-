@@ -1,4 +1,4 @@
-
+//Marcus Moad
 public class TileSet {
 	
 	private int firstGid;

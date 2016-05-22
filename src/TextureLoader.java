@@ -202,13 +202,6 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 							
 						}
 						
-						
-						
-						
-						
-						
-						
-						
 						//tileset[a] = tileBase.getSubimage(a*16, a*16, 16, 16);
 						//Graphics2D gr = tileset[a].createGraphics();  
 						//gr.drawImage(tileBase, 0, 0, 16, 16, 16 * a%32, 16 * a, 16 * a%32 + 16, 16 * a + 16, null);  
@@ -229,17 +222,11 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 				totalTileSets++;
 				
 			}
-			
-			
-			
+
 			//try{
 				
 			//}
-			
-			
-			
-			
-			
+	
 			//If the layer's name is Top, then that layer will be flagged to be rendered on the top layer of the Bitmap, so that the player can pass underneath it.
 			//If the name is't top, then it will just follow the order layed out by the Tiled program.
 			
@@ -383,22 +370,13 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 					//We found the right tileset for this gid
 					//currentTileSet = tileSet1;
 				}
-				
-				
-				
-				
-				
-				
+			
 			}
 			
 			layers.add(screenBitmap);
 			screenBitmap.flush();
 			//g.finalize();
 			
-				
-				
-				
-				
 			}
 			//This currently combines 2 layers into one BufferedImage
 			BufferedImage combined = new BufferedImage((int)Math.floor(mapWidth*16*scale), (int) Math.floor(mapHeight*16*scale), BufferedImage.TYPE_INT_ARGB);
@@ -410,9 +388,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 				gc.drawImage(layers.get(w), 0, 0, null);
 				//File outputfile = new File(LName + w + ".png");
 			//	ImageIO.write(combined, "png", outputfile);
-				
-				
-				
+			
 			}
 			//gc.finalize();
 			
@@ -551,16 +527,11 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 				//Node data = dataList.item(0);
 				//Element eData = (Element) data;
 				//NodeList tileList = eData.getElementsByTagName("tile");
-				
-				
-				
+		
 			}
 			
 			//Loading the objects layer
-			
-			
-			
-			
+	
 			//BufferedImage combined = new BufferedImage(mapWidth*16, mapHeight*16, BufferedImage.TYPE_INT_ARGB);
 			//Graphics2D gc = combined.createGraphics();
 			//gc.drawImage(screenBitmapTopLayer, 0, 0, null);
@@ -569,20 +540,13 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 		//	levelMaps.add
 	//	File outputfile = new File("image3.png");
 		//ImageIO.write(combined, "png", outputfile);
-			
-			
-			
-			
-			
-			
+	
 			
 			/*
 			 * List<BufferedImage> tileImages = new ArrayList<BufferedImage>();
 			for(int i = 0; i<totalTileSets; i++){
 				BufferedImage tileset = ImageIO.read(file)
-				
-				
-				
+			
 			}
 			*/
 			/*
@@ -595,9 +559,7 @@ public class TextureLoader {//Load will need to return a hashmap of the filename
 			*/
 			
 			//tiles.put( ,Tiles);
-		
-		
-		
+	
 		}catch(Exception e){
 			e.printStackTrace();
 		}

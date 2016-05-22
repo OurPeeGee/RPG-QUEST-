@@ -28,7 +28,7 @@ public class TestDriver extends JPanel{
 	private InputManager input;
 	private static PlayerTestEntity player;
 	private static Overlay overlay;
-	private int MAX_FRAMESKIP = 40;//wth does this do marcus -Erik TODO
+	private int MAX_FRAMESKIP = 40;//wth does this do marcus -Erik //Is this a max limit for repeating frames whilst waiting for the update? TODO
 
 	public static PlayerTestEntity getPlayer(){
 		return player;
@@ -46,12 +46,7 @@ public class TestDriver extends JPanel{
         
         g2d.dispose();
         
-        input = new InputManager();
-		
-        
-        
-		
-		
+        input = new InputManager();		       	
 	}
 	
 	//This starts the Game Engine
@@ -76,34 +71,13 @@ public class TestDriver extends JPanel{
         stateEngine.setOverlay(new Overlay(window));
         stateEngine.Add("Menu", new GamStMenu(window));
         stateEngine.Add("World", new GamStWorld(window));
-      //  this.addComponentListener(new ComponentAdapter(){
-        	//public void componentShown(Component window) {
-        	//	loop42(window);//game loop call;
-		//	}
-      //  });
-       
-        
-		
-		
-		//game state for every game mode
-		
-		
-		//cQuest.change("Menu");//changes the selected window to Menu
-		//cQuest.change("World");//changes the selected window to Menu
-		
-		//System.out.println("Driver window def");
-		//window.setBounds(0,0,1800,900);  //initial frame deffinition 
+
 		
 	    loop42(window);//game loop call;
-		//loop42(window);//game loop call;
+		
 	    	
 	}
-	
-	
-	//private void addComponentListener(ComponentAdapter componentAdapter) {
-	//	// TODO Auto-generated method stub
 		
-	//}
 
 	public void loop42(Component window) //Primary game loop 
 	{
@@ -163,7 +137,7 @@ public class TestDriver extends JPanel{
 			
 		}
 		
-		/*
+		
 		while(running)
 		{	
 			
@@ -209,7 +183,7 @@ public class TestDriver extends JPanel{
 			
 			//System.out.println(1000/(loopTime+1));	
 		}
-		*/
+		
 	}
 	/*
 	private void Render(float interp, Graphics g){
