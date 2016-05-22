@@ -1,4 +1,4 @@
-
+//Marcus moad?? Nick? 
 public class Item extends Entity {
 	public int refnum;
 	public String name;

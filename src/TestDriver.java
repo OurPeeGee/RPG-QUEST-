@@ -16,11 +16,11 @@ import javax.swing.JPanel;
 public class TestDriver extends JPanel{
 	
 	//static JFrame window = new JFrame(); 
-	private static double scale = 4;
+	private static double scale = 4;//Window Scaling 
 	//stateEngine cQuest = new stateEngine(); 
 	private int TickRate = 144;
 	private int skipTicks = 1000/TickRate;
-	private int frameRate=144;//the framerate of the game //Marcus: Somehow the physics of the game is tied to framerate.  I don't know if it is my code or the way this driver works that is causing it.
+	private int frameRate=2000;//the framerate of the game //Marcus: Somehow the physics of the game is tied to framerate.  I don't know if it is my code or the way this driver works that is causing it.
 	int cQuest = 0;//I did some test and it turns out that the gameUpdate is bound by the framerate value and the Render function is NOT.  This means that frameRate actually sets the rate of the game physics. TODO 
 	private Component window;
 	private BufferedImage GamePicture;
@@ -83,7 +83,7 @@ public class TestDriver extends JPanel{
 	{
 		long loopTime=0;//time for a single loop to be completed. must be consistantly below the frametime to achieve selected framerate
 		long frameTime=1000/frameRate;//milliseconds bettween frames 
-		int wait=0;
+		int wait=0;//TODO Does not work at high frames, not a huge deal. 
 		int frames_Skipped = 0;
 		int loops = 0;
 		long interpolation = 0;
@@ -114,8 +114,7 @@ public class TestDriver extends JPanel{
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
-				
+				}		
 			}
 			window.repaint();
 			//loopStart=System.currentTimeMillis();
@@ -133,14 +132,10 @@ public class TestDriver extends JPanel{
 				//frames_Skipped++;
 		//	}
 			
-			//Render(interpolation, g);
-			
+			//Render(interpolation, g);	
 		}
-		
-		
 		while(running)
 		{	
-			
 			loopStart=System.currentTimeMillis();
 			frames_Skipped = 0;
 			stateEngine.Update(window);
@@ -158,14 +153,12 @@ public class TestDriver extends JPanel{
 					e.printStackTrace();
 				}
 			}
-			
 			while(wait < 0 && frames_Skipped < MAX_FRAMESKIP ){
 				stateEngine.Update(window);
 				wait += frameTime;
 				frames_Skipped++;
 				System.out.println("Frames skipped: " + frames_Skipped);
 			}
-			
 			//System.out.println("loops this cycle"+loopTime/frameTime+" time ");
 			//for(int i=0;i<((int)loopTime/frameTime);i++);//call the game loop more frequently if the update time is longer than the target frame time
 			//{
@@ -194,7 +187,6 @@ public class TestDriver extends JPanel{
 			//stateEngine.Update(window);//calls update method of 	
 		}		 
 		
-		
 	}
 	*/
 	@Override
@@ -202,8 +194,7 @@ public class TestDriver extends JPanel{
 		//WHY THE FUCK IS THIS CALLED EVEN WHEN IT IS NEVER CALLED IN THE LOOP42?????
         super.paintComponent(g);
         
-        stateEngine.Render(g);
-        
+        stateEngine.Render(g); 
         //repaint();
 
         //for (Fish fish : fishes) {
